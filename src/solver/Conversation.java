@@ -10,6 +10,7 @@ public Conversation() {
 	this.currentCode="0";	//ho messo 0 ma sara' uguale al codice della prima domanda in assoluto
 	this.foundASolution=false;
 	}
+
 public void start() {
 	Question qst = new Question(currentCode);
 	while(!foundASolution) { //il ciclo di ripete finchè non viene chiamata dal DB una domanda che in realtà è una soluzione
