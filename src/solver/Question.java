@@ -1,6 +1,8 @@
 package solver;
 import java.util.ArrayList;
 
+import daos.QuestionDAO;
+
 public class Question {
 	private String code;
 	private String text;
@@ -34,8 +36,10 @@ public void setCode(String code) {
 	//mi rende possibile modificare il codice
 	}
 
-public void setText(String text) {
-	this.text = text;
+public void setText() {
+	QuestionDAO qstDAO = new QuestionDAO();
+	String text = qstDAO.getText(this.code);
+	this.text=text;
 	//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
 	}
 
