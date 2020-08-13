@@ -1,6 +1,8 @@
 package solver;
 
-public class Conversation {
+import java.util.Observable;
+
+public class Conversation extends Observable{
 	private String currentCode;
 	private boolean foundASolution;
 	private String solution;
@@ -12,7 +14,7 @@ public Conversation() {
 	}
 public void start() {
 	Question qst = new Question(currentCode);
-	while(!foundASolution) { //il ciclo di ripete finchè non viene chiamata dal DB una domanda che in realtà è una soluzione
+	while(!foundASolution) { //il ciclo di ripete finchï¿½ non viene chiamata dal DB una domanda che in realtï¿½ ï¿½ una soluzione
 		System.out.println(qst.getText());
 		for (Answer option : qst.getOptions()) { //mosta all'utente domanda e opzioni
 			System.out.println(option.getText());
@@ -25,7 +27,7 @@ public void start() {
 		String input="quello che ha messo l'utente";
 		
 		{
-		//qui ci dovrà essere una parte dedicata allo studio dell'input in base al quale si decide se chiamare nextQuestion o
+		//qui ci dovrï¿½ essere una parte dedicata allo studio dell'input in base al quale si decide se chiamare nextQuestion o
 		//prevQuestion
 		}
 		{
@@ -39,11 +41,16 @@ public void nextQuestion(Question question, String optioncode) { //permette di m
 	question.setCode(newcode);
 	this.currentCode=newcode;
 	
+	//notifica agli observer
+	
 	}
 public void prevQuestion(Question question) {
 	String oldcode=question.getCode().substring(0, question.getCode().length());
 	question.setCode(oldcode);		//se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
 	this.currentCode=oldcode;		//togliendo l'ultima cifra, restituendo cosi la domanda precedente
+	
+	//notifica agli observer
 }
+
 
 }
