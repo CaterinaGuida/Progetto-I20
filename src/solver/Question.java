@@ -42,6 +42,7 @@ public void setText(String text) {
 public void setOptions(ArrayList<Answer> options) {
 	this.options = options;
 	//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
+	//ci sara' anche setcode e settext d answer
 	}
 
 
