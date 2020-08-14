@@ -6,15 +6,15 @@ import java.sql.SQLException;
 public class DBConnection {
 	
 	public static Connection startConnection(Connection conn, String schema) {
-		String DbDriver="com.mysq.jdbc.Driver";
+		String DbDriver="com.mysql.jdbc.Driver";
 		String DbURL="sql9.freemysqlhosting.net";
 		String username="sql9359791";
 		String password="eRBKt5y1Z7";
 		if(isOpen(conn))
 			closeConnection(conn);
 		try {
-			Class.forName("com.mysq.cj.jdbc.Driver");
-			conn=DriverManager.getConnection(DbURL, username, password); //apre connesione
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn=DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306", username, password); //apre connesione
 			
 		}
 		catch (Exception e) {

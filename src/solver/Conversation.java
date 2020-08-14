@@ -2,6 +2,7 @@ package solver;
 
 import java.util.Observable;
 
+@SuppressWarnings("deprecation")
 public class Conversation extends Observable{
 	private String currentCode;
 	private boolean foundASolution;

@@ -17,11 +17,11 @@ public String getText(String cod) { //metodo per restituire testo dato codice
 	conn=DBConnection.startConnection(conn, schema);
 	Statement st1;
 	ResultSet rs1 = null;
-	String text=null;
+	String text=null;		
 	try {
-		st1=conn.createStatement();						//!!!!!NON FUNZIONA!!!!!!
+		st1=conn.createStatement();						
 		String query="SELECT text WHERE ID="+cod; 		//!!!!!NON FUNZIONA!!!!!!
-		rs1=st1.executeQuery(query);					//!!!!!NON FUNZIONA!!!!!!
+		rs1=st1.executeQuery(query);					
 		text=rs1.getString(2);
 	}
 	catch (Exception e) {e.printStackTrace();
@@ -29,5 +29,4 @@ public String getText(String cod) { //metodo per restituire testo dato codice
 	DBConnection.closeConnection(conn);
 	return text;
 }
-
 }
