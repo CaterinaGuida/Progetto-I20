@@ -1,5 +1,6 @@
 package solver;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 @SuppressWarnings("deprecation")
@@ -7,6 +8,10 @@ public class Conversation extends Observable{
 	private String currentCode;
 	private boolean foundASolution;
 	private String solution;
+	//question e answer vengono aggiornate 
+	//ogni volta dai vari metodi
+	private Question qst;
+	private Answer ans;
 
 
 	public Conversation() {
@@ -15,7 +20,7 @@ public class Conversation extends Observable{
 	}
 
 	public void start() {
-		Question qst = new Question(currentCode);
+		qst = new Question(currentCode);
 		while(!foundASolution) { //il ciclo di ripete finch� non viene chiamata dal DB una domanda che in realt� � una soluzione
 			System.out.println(qst.getText());
 			for (Answer option : qst.getOptions()) { //mosta all'utente domanda e opzioni
@@ -54,5 +59,16 @@ public class Conversation extends Observable{
 		//notifica agli observer
 	}
 
+	public void setAnswerReady(Answer ans){
+		this.ans=ans;
+	}
+	
+	public ArrayList<Answer> getAnswersList(){
+		return qst.getOptions();
+	}
+	
+	public String getQuestionText() {
+		return qst.getText();
+	}
 
 }

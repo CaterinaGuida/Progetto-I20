@@ -7,20 +7,15 @@ import java.util.Observer;
 
 public class CliUI implements GuiInterface{
 	
-	private void printQuestion(String questionText) {
+	public void printQuestion(String questionText) {
 		System.out.println(questionText);
 	}
 	
-	private void printPossibleAnswers(ArrayList<String> answers) {
+	public void printOptions(ArrayList<String> answers) {
 		for(String s: answers) {
-			System.out.println(s);
+			int index= answers.indexOf(s);
+			System.out.println(index + ") "+s);
 		}
-	}
-
-	@Override
-	public void update(@SuppressWarnings("deprecation") Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -32,6 +27,13 @@ public class CliUI implements GuiInterface{
 			e.printStackTrace();
 		}
 		return -1;
+	}
+
+	@Override
+	public void printSolution(String solutionText) {
+		// TODO Auto-generated method stub
+		System.out.println("Soluzioneeee!!!!!");
+		System.out.println(solutionText);
 	}
 	
 	
