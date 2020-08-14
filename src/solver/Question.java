@@ -8,45 +8,45 @@ public class Question {
 	private String text;
 	private ArrayList<Answer> options;
 	
-public Question(String code) {
-	this.code=code;
-	//QUI CI SARA' IL METODO CHE PRENDE LE INFO DAL DB
-	//STESSA COSA CON LE OPTIONS
+	public Question(String code) {
+		this.code=code;
+		//QUI CI SARA' IL METODO CHE PRENDE LE INFO DAL DB
+		//STESSA COSA CON LE OPTIONS
 	}
 
-public String getCode() {
-	return code;
-	//mi da il codice della domanda
+	public String getCode() {
+		return code;
+		//mi da il codice della domanda
 	}
 
-public String getText() {
-	return text;
-	//mi da il testo della domada
-	
+	public String getText() {
+		return text;
+		//mi da il testo della domada
+
 	}
 
-public ArrayList<Answer> getOptions() {
-	return options;
-	//mi da l'array delle opzioni
-	
+	public ArrayList<Answer> getOptions() {
+		return options;
+		//mi da l'array delle opzioni
+
 	}
 
-public void setCode(String code) {
-	this.code = code;
-	//mi rende possibile modificare il codice
+	public void setCode(String code) {
+		this.code = code;
+		//mi rende possibile modificare il codice
 	}
 
-public void setText() {
-	QuestionDAO qstDAO = new QuestionDAO();
-	String text = qstDAO.getText(this.code);
-	this.text=text;
-	//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
+	public void setText() {
+		QuestionDAO qstDAO = new QuestionDAO();
+		String text = qstDAO.getText(this.code);
+		this.text=text;
+		//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
 	}
 
-public void setOptions(ArrayList<Answer> options) {
-	this.options = options;
-	//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
-	//ci sara' anche setcode e settext d answer
+	public void setOptions(ArrayList<Answer> options) {
+		this.options = options;
+		//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
+		//ci sara' anche setcode e settext d answer
 	}
 
 
