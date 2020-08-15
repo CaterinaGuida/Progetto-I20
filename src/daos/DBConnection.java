@@ -14,7 +14,10 @@ public class DBConnection {
 			closeConnection(conn);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
+
 			conn=DriverManager.getConnection(DbURL, username, password); //apre connesione
+
+			conn=DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306", username, password); //apre connesione
 			
 		}
 		catch (Exception e) {

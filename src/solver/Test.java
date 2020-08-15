@@ -7,8 +7,6 @@ public class Test {
 		Question qst = new Question("F121");
 		qst.setText();
 		System.out.println(qst.getText());
-		
-
 	}
 
 }
