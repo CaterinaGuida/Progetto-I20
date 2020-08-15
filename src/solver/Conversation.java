@@ -58,7 +58,6 @@ public class Conversation extends Observable{
 		String newCode=question.getCode()+optionCode;				//cosa ha scelto l'utente, se ha scelto di rispondere
 		question.setCode(newCode);
 		this.setCurrentCode(newCode);
-=======
 		this.currentCode="0";	//ho messo 0 ma sara' uguale al codice della prima domanda in assoluto
 		this.foundASolution=false;
 	}
