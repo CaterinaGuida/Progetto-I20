@@ -1,6 +1,7 @@
 package solver;
 
 import java.util.Observable;
+import java.util.Scanner;
 
 public class Conversation extends Observable{
 	private String currentCode;
@@ -9,49 +10,64 @@ public class Conversation extends Observable{
 
 
 	public Conversation() {
-		this.currentCode="0";	//ho messo 0 ma sara' uguale al codice della prima domanda in assoluto
-		this.foundASolution=false;
+		//Costruttore inutile, lasciato bianco a posta.
+	}
+	
+	/*Pre-condizione: FirstQuestion è una domanda non vuota.
+	 *Implementazione: Il costruttore prende come parametro un oggetto di tipo Question, ne legge il codice e lo assegna alla variabile currentCode.
+	 *Post-condizione: L'oggetto conversazione così istanziato "punterà" alla prima domanda".
+	 */
+	
+	public Conversation(Question FirstQuestion) {
+		this.currentCode = FirstQuestion.getCode();
+		this.foundASolution = false;
+	}
+	
+	//Metodi getter e setter
+	public String getCurrentCode() {
+		return currentCode;
 	}
 
-	public void start() {
-		Question qst = new Question(currentCode);
-		while(!foundASolution) { //il ciclo di ripete finch� non viene chiamata dal DB una domanda che in realt� � una soluzione
-			System.out.println(qst.getText());
-			for (Answer option : qst.getOptions()) { //mosta all'utente domanda e opzioni
-				System.out.println(option.getText());
-			}
-
-			{
-				//!!!!!!ASPETTA L'INPUT DELL'UTENTE!!!!!!
-			}
-
-			String input="quello che ha messo l'utente";
-
-			{
-				//qui ci dovr� essere una parte dedicata allo studio dell'input in base al quale si decide se chiamare nextQuestion o
-				//prevQuestion
-			}
-			{
-				//qui invece un check sul database per vedere se la domanda e' una soluzione, nel caso lo fosse si modifica
-				//foundASOlution in true e si arresta il ciclo
-			}
-		}
+	public void setCurrentCode(String currentCode) {
+		this.currentCode = currentCode;
 	}
-	public void nextQuestion(Question question, String optioncode) { //permette di modificare il contenuto della domanda in base a
-		String newcode=question.getCode()+optioncode;				//cosa ha scelto l'utente, se ha scelto di risondere
-		question.setCode(newcode);
-		this.currentCode=newcode;
+
+	public boolean isFoundASolution() {
+		return foundASolution;
+	}
+
+	public void setFoundASolution(boolean foundASolution) {
+		this.foundASolution = foundASolution;
+	}
+
+	public String getSolution() {
+		return solution;
+	}
+
+	public void setSolution(String solution) {
+		this.solution = solution;
+	}
+
+	public void nextQuestion(Question question, String optionCode) { //permette di modificare il contenuto della domanda in base a
+		String newCode=question.getCode()+optionCode;				//cosa ha scelto l'utente, se ha scelto di rispondere
+		question.setCode(newCode);
+		this.setCurrentCode(newCode);
 
 		//notifica agli observer
 
 	}
 	public void prevQuestion(Question question) {
-		String oldcode=question.getCode().substring(0, question.getCode().length());
-		question.setCode(oldcode);		//se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
-		this.currentCode=oldcode;		//togliendo l'ultima cifra, restituendo cosi la domanda precedente
+		String oldCode=question.getCode().substring(0, question.getCode().length());
+		question.setCode(oldCode);		//se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
+		this.setCurrentCode(oldCode);		//togliendo l'ultima cifra, restituendo cosi la domanda precedente
 
 		//notifica agli observer
 	}
 
+	private String leggiInput() {
+		Scanner tastiera = new Scanner(System.in);
+		String optionCode = tastiera.next();
+		return optionCode;
+	}
 
 }

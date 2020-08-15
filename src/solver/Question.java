@@ -49,6 +49,4 @@ public class Question {
 		//ci sara' anche setcode e settext d answer
 	}
 
-
-
 }
