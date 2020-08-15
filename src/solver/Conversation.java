@@ -74,6 +74,7 @@ public class Conversation extends Observable{
 		Scanner tastiera = new Scanner(System.in);
 		String optionCode = tastiera.next();
 		return optionCode;
+	}
 	public void setAnswerReady(Answer ans){
 		this.ans=ans;
 	}

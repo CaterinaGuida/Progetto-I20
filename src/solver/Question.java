@@ -40,11 +40,10 @@ public class Question {
 		QuestionDAO qstDAO = new QuestionDAO();
 		String text = qstDAO.getText(this.code);
 		this.text=text;
-		//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
 	}
 
-	public void setOptions(ArrayList<Answer> options) {
-		this.options = options;
+	public void setOptions() {
+		
 		//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
 		//ci sara' anche setcode e settext d answer
 	}
