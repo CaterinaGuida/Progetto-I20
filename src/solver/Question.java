@@ -1,6 +1,7 @@
 package solver;
 import java.util.ArrayList;
 
+import daos.AnswerDAO;
 import daos.QuestionDAO;
 
 public class Question {
@@ -43,9 +44,8 @@ public class Question {
 	}
 
 	public void setOptions() {
-		
-		//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
-		//ci sara' anche setcode e settext d answer
+		AnswerDAO answer=new AnswerDAO();
+		this.options=answer.getAnswer(this.code);
 	}
 
 }

@@ -8,30 +8,24 @@ import java.sql.Statement;
 
 public class QuestionDAO {
 	
-	private String schema;
 	private Connection conn;
 
 	public QuestionDAO() {
-		this.schema="sql9359791";
+		conn=DBConnection.startConnection(conn);
 	}
 	
 	public String getText(String cod) { //metodo per restituire testo dato codice
-		conn=DBConnection.startConnection(conn);
-		try {
-			conn.setSchema(schema);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		PreparedStatement st1;
+		PreparedStatement st1=null;
 		ResultSet rs1 = null;
 		String text=null;		
 		try {					
 			String query="SELECT text FROM question WHERE ID = '"+cod+"'";
 			st1=conn.prepareStatement(query);
 			rs1=st1.executeQuery(query);
-			while(rs1.next())
+			if(rs1.next())
 				text=rs1.getString(1);
+			st1.close();
+			rs1.close();
 		}
 		catch (Exception e) {e.printStackTrace();
 		}

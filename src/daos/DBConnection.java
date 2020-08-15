@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
 		private static final String DbDriver="com.mysql.cj.jdbc.Driver";
+		public static final String schema="sql9359791";
 		private static final String DbURL="jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9359791";
 		private static final String username="sql9359791";
 		private static final String password="eRBKt5y1Z7";
@@ -14,7 +15,7 @@ public class DBConnection {
 		try {
 			Class.forName(DbDriver);
 			conn=DriverManager.getConnection(DbURL, username, password); //apre connesione
-			
+			conn.setSchema(schema);	
 		}
 		catch (Exception e) {
 			e.printStackTrace();

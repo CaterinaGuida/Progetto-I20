@@ -4,9 +4,9 @@ public class Answer {
 	private String code;
 	private String text;
 
-	public Answer(String code){
+	public Answer(String code,String text){
 		this.code=code;
-		//DA MODIFICARE INSERENDO IL METODO CHE LEGGE DA DB
+		this.text=text;
 	}
 
 	public String getCode() {
@@ -28,5 +28,7 @@ public class Answer {
 		this.text = text;
 		//possibilita di modifica il testo (forse inutile)
 	}
-
+	public String toString() {
+		return code+" "+text;
+	}
 }
