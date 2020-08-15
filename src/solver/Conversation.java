@@ -19,21 +19,14 @@ public class Conversation extends Observable{
 		this.foundASolution=false;
 	}
 
-<<<<<<< HEAD
-public void start() {
-	Question qst = new Question(currentCode);
-	while(!foundASolution) { //il ciclo di ripete finche' non viene chiamata dal DB una domanda che in realt� � una soluzione
-		System.out.println(qst.getText());
-		for (Answer option : qst.getOptions()) { //mosta all'utente domanda e opzioni
-			System.out.println(option.getText());
-=======
+
 	public void start() {
 		qst = new Question(currentCode);
 		while(!foundASolution) { //il ciclo di ripete finch� non viene chiamata dal DB una domanda che in realt� � una soluzione
 			System.out.println(qst.getText());
 			for (Answer option : qst.getOptions()) { //mosta all'utente domanda e opzioni
 				System.out.println(option.getText());
->>>>>>> branch 'master' of https://github.com/IngSW-unipv/Progetto-I20.git
+
 			}
 
 			{
