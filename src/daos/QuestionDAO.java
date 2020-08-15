@@ -19,10 +19,10 @@ public class QuestionDAO {
 		ResultSet rs1 = null;
 		String text=null;		
 		try {
-			st1=conn.createStatement();						//!!!!!NON FUNZIONA!!!!!!
-			String query="SELECT text WHERE ID="+cod; 		//!!!!!NON FUNZIONA!!!!!!
-			rs1=st1.executeQuery(query);					//!!!!!NON FUNZIONA!!!!!!
-			text=rs1.getString(2);
+			st1=conn.createStatement();						
+			String query="SELECT text WHERE ID= "+cod; 		//!!!!!NON FUNZIONA!!!!!!
+			rs1=st1.executeQuery(query);					
+			text=rs1.getString(1);
 		}
 		catch (Exception e) {e.printStackTrace();
 		}
