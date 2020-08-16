@@ -54,10 +54,12 @@ public class Conversation extends Observable{
 		this.solution = solution;
 	}
 
-	public void nextQuestion(Question question, String optioncode) { //permette di modificare il contenuto della domanda in base a
-		String newcode=question.getCode()+optioncode;				//cosa ha scelto l'utente, se ha scelto di risondere
-		question.setCode(newcode);
-		this.currentCode=newcode;
+	public void nextQuestion(Question question, String optionCode) { //permette di modificare il contenuto della domanda in base a
+		String newCode = question.getCode() + optionCode;				//cosa ha scelto l'utente, se ha scelto di risondere
+		question.setCode(newCode);
+		this.currentCode = newCode;
+		question.setText(); //Aggiunto questo metodo così da aggiornare anche il testo della domanda oltre al codice.
+		question.setOptions(); //Aggiunto questo metodo così da aggiornare anche le risposte possibili associate alla domanda.
 		//notifica agli observer
 
 	}
@@ -70,11 +72,51 @@ public class Conversation extends Observable{
 		//notifica agli observer
 	}
 
-	private String leggiInput() {
+	/*Pre-condizione: l'attributo qst di tipo Question è stato già inizializzato.
+	 *Implementazione: Banalmente questo metodo restituisce un oggetto di tipo risposta che è effettivamente la risposta dell'utente. Dal momento che 
+	 *l'input dell'utente è una string, il metodo si occupa anche, tramite il ciclo for, di "ricondurre" l'input ad una Answer vera e propria tra quelle che
+	 *l'oggetto Question qst gli propone. Per farlo, confronto l'opzione data dall'utente con il codice di ogni risposta. Una volta trovato interrompo 
+	 *l'iterazione e restituisco la Answer a cui il codice fornito si riferisce.
+	 *Post-condizione: adesso sappiamo quale risposta (Answer) ha dato l'utente.*/
+	private Answer readAnswer() {
 		Scanner tastiera = new Scanner(System.in);
 		String optionCode = tastiera.next();
-		return optionCode;
+		Answer givenAnswer = new Answer();
+		for (int i = 0; i < qst.getOptions().size(); i++) {
+			Answer answerIterator = qst.getOptions().get(i); //Una variabile che contiene l'i-esima risposta
+			if (answerIterator.getCode().contains(optionCode))
+				givenAnswer = answerIterator;
+				break;
+		}
+		return givenAnswer;
 	}
+	
+	//Metodo per verificare se la conversazione è giunta praticamente al termine
+	private boolean isLastQuestion(Answer answerGiven) {
+		if (answerGiven.getCode().contains("S"))
+			return true;
+		else
+			return false;
+	}
+	
+	/*Questo metodo gestisce essenzialmente il botta e risposta tra client e server.*/
+	private void problemFinder() {
+		while (!foundASolution) {
+			System.out.println(qst.getText());
+			System.out.println(qst.getOptions());
+			Answer userChoice = readAnswer();
+			//Verifico se è l'ultima domanda
+			if (!isLastQuestion(userChoice)) 
+				nextQuestion(qst, userChoice.getCode()); //In caso non lo fosse, aggiorno la domanda
+			else
+				setFoundASolution(true);
+			
+		}
+		
+		//Qui o in un altro metodo da richiamare sempre qua, ci andrebbe il codice per mostrare la soluzione.
+	}
+	
+	//Commentare questi metodi.
 	public void setAnswerReady(Answer ans){
 		this.ans=ans;
 	}
