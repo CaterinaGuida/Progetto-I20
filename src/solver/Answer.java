@@ -4,9 +4,13 @@ public class Answer {
 	private String code;
 	private String text;
 
-	public Answer(String code,String text){
+	//Costruttore di default
+	public Answer() {
+		super();
+	}
+	public Answer(String code, String text){
 		this.code=code;
-		this.text=text;
+		this.text = text;
 	}
 
 	public String getCode() {
