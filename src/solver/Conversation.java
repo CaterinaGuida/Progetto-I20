@@ -26,8 +26,9 @@ public class Conversation extends Observable{
 	 *Post-condizione: L'oggetto conversazione così istanziato "punterà" alla prima domanda".
 	 */
 	
-	public Conversation(Question FirstQuestion) {
-		this.currentCode = FirstQuestion.getCode();
+	public Conversation(Question firstQuestion) {
+		this.currentCode = firstQuestion.getCode();
+		this.qst=firstQuestion;
 		this.foundASolution = false;
 	}
 	
@@ -66,7 +67,7 @@ public class Conversation extends Observable{
 		this.currentCode = newCode;
 		question.setText(); //Aggiunto questo metodo così da aggiornare anche il testo della domanda oltre al codice.
 		question.setOptions(); //Aggiunto questo metodo così da aggiornare anche le risposte possibili associate alla domanda.
-		//notifica agli observer
+		this.qst=question;
 
 	}
 
@@ -75,7 +76,7 @@ public class Conversation extends Observable{
 		question.setCode(oldCode);		//se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
 		this.setCurrentCode(oldCode);		//togliendo l'ultima cifra, restituendo cosi la domanda precedente
 
-		//notifica agli observer
+		this.qst=question;
 	}
 
 	/*Pre-condizione: l'attributo qst di tipo Question è stato già inizializzato.
@@ -84,7 +85,7 @@ public class Conversation extends Observable{
 	 *l'oggetto Question qst gli propone. Per farlo, confronto l'opzione data dall'utente con il codice di ogni risposta. Una volta trovato interrompo 
 	 *l'iterazione e restituisco la Answer a cui il codice fornito si riferisce.
 	 *Post-condizione: adesso sappiamo quale risposta (Answer) ha dato l'utente.*/
-	private Answer readAnswer() {
+	/*private Answer readAnswer() {
 		Scanner tastiera = new Scanner(System.in);
 		String optionCode = tastiera.next();
 		Answer givenAnswer = new Answer();
@@ -95,7 +96,7 @@ public class Conversation extends Observable{
 				break;
 		}
 		return givenAnswer;
-	}
+	}*/  //questa l ho commentata perchè è una funziona risarvata alle interfacce
 	
 	//Metodo per verificare se la conversazione è giunta praticamente al termine
 	private boolean isLastQuestion(Answer answerGiven) {
@@ -105,19 +106,31 @@ public class Conversation extends Observable{
 			return false;
 	}
 	
+	/*questo metodo fa partire la conversazione*/
+	public void beginConversation() {
+		problemFinder();
+	}
+	
 	/*Questo metodo gestisce essenzialmente il botta e risposta tra client e server.*/
 	private void problemFinder() {
 		while (!foundASolution) {
-			System.out.println(qst.getText());
-			System.out.println(qst.getOptions());
-			Answer userChoice = readAnswer();
+			
+			//manda notifica agli observers
+			setChanged();
+			notifyObservers();
+			//automaticamente ans è l' ultima risposta
+			
+			
 			//Verifico se è l'ultima domanda
-			if (!isLastQuestion(userChoice)) 
-				nextQuestion(qst, userChoice.getCode()); //In caso non lo fosse, aggiorno la domanda
+			if (!isLastQuestion(ans)) 
+				nextQuestion(qst, ans.getCode()); //In caso non lo fosse, aggiorno la domanda
 			else
 				setFoundASolution(true);
 			
 		}
+		
+		setChanged();
+		notifyObservers();
 		
 		//Qui o in un altro metodo da richiamare sempre qua, ci andrebbe il codice per mostrare la soluzione.
 	}

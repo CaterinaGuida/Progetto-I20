@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 public class CliUI implements GuiInterface{
 	
@@ -20,13 +21,10 @@ public class CliUI implements GuiInterface{
 
 	@Override
 	public int readAnswer() {
-		try {
-			return System.in.read();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return -1;
+		Scanner sca= new Scanner(System.in);
+		System.out.print("scegli ==>> ");
+		return sca.nextInt();
+
 	}
 
 	@Override

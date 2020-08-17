@@ -29,7 +29,7 @@ public class GuiController implements Observer{
 	
 	private void startDialog() {
 		if(conversazione.isFoundASolution() == true)
-			interfaccia.printSolution(null);
+			interfaccia.printSolution(conversazione.getSolution());
 		else {
 			interfaccia.printQuestion(conversazione.getQuestionText()); //da definire passaggiodi parametri
 			ArrayList<String> stringOptionList=ConversationUtil.fromAnswersToStrings(
