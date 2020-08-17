@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 
+import daos.SolutionDAO;
+
 @SuppressWarnings("deprecation")
 public class Conversation extends Observable{
 	private String currentCode;
@@ -17,7 +19,7 @@ public class Conversation extends Observable{
 
 	public Conversation() {
 		//Costruttore inutile, lasciato bianco a posta.
-	}
+	} //comunicare con fra molte cose non chiare 
 	
 	/*Pre-condizione: FirstQuestion è una domanda non vuota.
 	 *Implementazione: Il costruttore prende come parametro un oggetto di tipo Question, ne legge il codice e lo assegna alla variabile currentCode.
@@ -36,6 +38,10 @@ public class Conversation extends Observable{
 
 	public void setCurrentCode(String currentCode) {
 		this.currentCode = currentCode;
+	}
+	public String getSolution(String code) {
+		SolutionDAO solution=new SolutionDAO();
+		return solution.getText(code);
 	}
 
 	public boolean isFoundASolution() {
