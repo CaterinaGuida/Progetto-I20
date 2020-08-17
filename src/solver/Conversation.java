@@ -40,9 +40,9 @@ public class Conversation extends Observable{
 	public void setCurrentCode(String currentCode) {
 		this.currentCode = currentCode;
 	}
-	public String getSolution(String code) {
+	public void setSolution(String code) {
 		SolutionDAO solution=new SolutionDAO();
-		return solution.getText(code);
+		this.solution=solution.getText(code);
 	}
 
 	public boolean isFoundASolution() {
@@ -55,10 +55,6 @@ public class Conversation extends Observable{
 
 	public String getSolution() {
 		return solution;
-	}
-
-	public void setSolution(String solution) {
-		this.solution = solution;
 	}
 
 	public void nextQuestion(Question question, String optionCode) { //permette di modificare il contenuto della domanda in base a
