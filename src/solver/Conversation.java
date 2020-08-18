@@ -27,7 +27,7 @@ public class Conversation extends Observable{
 	 */
 	
 	public Conversation(Question firstQuestion) {
-		this.currentCode = firstQuestion.getCode();
+		this.currentCode = firstQuestion.getCode(); //cambiare costruttore 
 		this.qst=firstQuestion;
 		this.foundASolution = false;
 	}
