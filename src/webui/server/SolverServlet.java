@@ -22,11 +22,11 @@ public class SolverServlet extends HttpServlet {
 	
 	private void buildAnswersForm(HttpServletResponse resp, ArrayList<String> options) throws IOException {
 		
-		resp.getWriter().write("<form method=\"get\" action=\"/nextqst\"><br>");
+		resp.getWriter().write("<form method=\"get\" action=\"/saveqst\"><br>");
+		resp.getWriter().write("<select name=\"answ\" id=\"answ\">");
 		
 		for(String s: options) {
-			resp.getWriter().write("<input type=\"radio\" id=\"answ\" value=\""+ s +"\"/>");
-			resp.getWriter().write(s);
+			resp.getWriter().write("<option value=\""+s+"\">"+s+"</option>");
 			resp.getWriter().write("<br>");
 		}
 		resp.getWriter().write("<input type=\"submit\" value=\"Next Question\"/>");
@@ -34,9 +34,9 @@ public class SolverServlet extends HttpServlet {
 	}
 
 	private void saveResp(HttpServletRequest req) {
-		if(req.getParameter("id").equals("answ")) {
-			sf.sendAnswer(req.getParameter("value"));
-		}
+		System.out.println(req.getParameter("answ"));
+		sf.sendAnswer(req.getParameter("answ"));
+			
 	}
 	
 	@Override
