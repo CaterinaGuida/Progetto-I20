@@ -36,13 +36,13 @@ public class QuestionDAO {
 		DBConnection.closeConnection(conn);
 		return text;
 	}
-	public HashMap<String,Question> getQuestions() { //metodo per restituire testo dato codice 
+	public HashMap<String,Question> getQuestions(String code) { //metodo per restituire testo dato codice 
 		PreparedStatement st1=null;
 		ResultSet rs1 = null;
 		Question q=null;
 		HashMap<String,Question> questions=new HashMap<>();
 		try {					
-			String query="SELECT ID,question.text as question,num,answer.text as answer,id_question FROM	question,answer WHERE	ID=id_question order by ID";
+			String query="SELECT ID,question.text as question,num,answer.text as answer,id_question FROM	question,answer WHERE	ID=id_question and id_product='"+code+"' order by ID";
 			st1=conn.prepareStatement(query);
 			rs1=st1.executeQuery(query);
 			rs1.next();
@@ -71,7 +71,7 @@ public class QuestionDAO {
 	}
 	public static void main(String[] args) {
 		QuestionDAO q=new QuestionDAO();
-		HashMap<String,Question> prova=q.getQuestions();
+		HashMap<String,Question> prova=q.getQuestions("F");
 		System.out.println(prova.get("F22122").toString());
 	}
 }
