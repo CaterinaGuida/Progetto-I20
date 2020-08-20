@@ -26,4 +26,12 @@ public class SolverFacade{
 	public ArrayList<String> retreiveQuestionOptions(){
 		return ConversationUtil.fromAnswersToStrings(conv.getAnswersList());
 	}
+	
+	public boolean isFoundASolution() {
+		return conv.isFoundASolution();
+	}
+	
+	public String getSolution() {
+		return conv.getSolution();
+	}
 }

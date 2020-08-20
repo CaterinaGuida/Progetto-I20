@@ -20,6 +20,10 @@ public class SolverServlet extends HttpServlet {
 		this.sf=sf;
 	}
 	
+	private void genSolutionPage(HttpServletResponse resp) throws IOException {
+		resp.getWriter().write("<h1>"+sf.getSolution()+"</h1>");
+	}
+	
 	private void buildAnswersForm(HttpServletResponse resp, ArrayList<String> options) throws IOException {
 		
 		resp.getWriter().write("<form method=\"get\" action=\"/saveqst\"><br>");
@@ -52,11 +56,16 @@ public class SolverServlet extends HttpServlet {
 		else if (req.getPathInfo().equals("/nextqst")) {
 			
 			
-			resp.getWriter().write("<h1>"+sf.retreiveQuestionText()+"</h1>");
-			buildAnswersForm(resp, sf.retreiveQuestionOptions());
-		}
-		else {
-			resp.getWriter().write("<h1>Benvenuto il pennuto</h1>");
+			if(sf.isFoundASolution()) {
+				resp.sendRedirect("/solution");
+			}else {
+				resp.getWriter().write("<h1>"+sf.retreiveQuestionText()+"</h1>");
+				buildAnswersForm(resp, sf.retreiveQuestionOptions());
+			}
+		}else if(req.getPathInfo().equals("/solution")) {
+			genSolutionPage(resp);
+		}else {
+			resp.getWriter().write("<h1>Benvenuto il pennuto</h1><br><a href=\"/nextqst\">Clicca per cominciare</a>");
 		}
 	
 	}
