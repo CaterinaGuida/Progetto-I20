@@ -3,7 +3,9 @@ package solver;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
+import java.util.HashMap;
 
+import daos.QuestionDAO;
 import daos.SolutionDAO;
 
 @SuppressWarnings("deprecation")
@@ -13,24 +15,19 @@ public class Conversation extends Observable{
 	private String solution;
 	//question e answer vengono aggiornate 
 	//ogni volta dai vari metodi
+	private QuestionTable applianceTable;
 	private Question qst;
 	private Answer ans;
 
-
+	
 	public Conversation() {
-		//Costruttore inutile, lasciato bianco a posta.
-	} //comunicare con fra molte cose non chiare 
-	
-	/*Pre-condizione: FirstQuestion è una domanda non vuota.
-	 *Implementazione: Il costruttore prende come parametro un oggetto di tipo Question, ne legge il codice e lo assegna alla variabile currentCode.
-	 *Post-condizione: L'oggetto conversazione così istanziato "punterà" alla prima domanda".
-	 */
-	
-	public Conversation(Question firstQuestion) {
-		this.currentCode = firstQuestion.getCode(); //cambiare costruttore 
-		this.qst=firstQuestion;
+		this.currentCode = "0";
 		this.foundASolution = false;
-	}
+		this.solution = null;
+		currentCode = applianceSelector();
+		this.applianceTable = new QuestionTable(currentCode);
+		this.qst = applianceTable.questionTable.get(currentCode);
+	} 
 	
 	//Metodi getter e setter
 	public String getCurrentCode() {
@@ -54,17 +51,17 @@ public class Conversation extends Observable{
 		return this.solution;
 	}
 
-	public void nextQuestion(Question question, String optionCode) { //permette di modificare il contenuto della domanda in base a
-		String newCode = question.getCode() + optionCode;				//cosa ha scelto l'utente, se ha scelto di risondere
-		question.setCode(newCode);
+	/*Pre-condizione : question e optionCode sono inizializzati.
+	 *Implementazione: Questa rivisitazione del metodo nextQuestion calcola il codice della domanda successiva, lo assegna alla
+	 *variabile currentCode della classe Conversation e, sempre col medesimo codice appena calcolato, interroga la tabella di Hash
+	 *affinch� restituisca l'oggetto Question pertinente.*/
+	private void nextQuestion(Question question, String optionCode) { 
+		String newCode = question.getCode() + optionCode;
 		this.currentCode = newCode;
-		question.setText(); //Aggiunto questo metodo così da aggiornare anche il testo della domanda oltre al codice.
-		question.setOptions(); //Aggiunto questo metodo così da aggiornare anche le risposte possibili associate alla domanda.
-		this.qst=question;
-
+		this.qst = applianceTable.questionTable.get(newCode);
 	}
 
-	public void prevQuestion(Question question) {
+	private void prevQuestion(Question question) {
 		String oldCode=question.getCode().substring(0, question.getCode().length());
 		question.setCode(oldCode);		//se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
 		this.setCurrentCode(oldCode);		//togliendo l'ultima cifra, restituendo cosi la domanda precedente
@@ -78,18 +75,17 @@ public class Conversation extends Observable{
 	 *l'oggetto Question qst gli propone. Per farlo, confronto l'opzione data dall'utente con il codice di ogni risposta. Una volta trovato interrompo 
 	 *l'iterazione e restituisco la Answer a cui il codice fornito si riferisce.
 	 *Post-condizione: adesso sappiamo quale risposta (Answer) ha dato l'utente.*/
-	/*private Answer readAnswer() {
+	private Answer readAnswer() {
 		Scanner tastiera = new Scanner(System.in);
 		String optionCode = tastiera.next();
 		Answer givenAnswer = new Answer();
-		for (int i = 0; i < qst.getOptions().size(); i++) {
-			Answer answerIterator = qst.getOptions().get(i); //Una variabile che contiene l'i-esima risposta
-			if (answerIterator.getCode().contains(optionCode))
+		for (Answer answerIterator : qst.getOptions()) {
+			if (answerIterator.getCode().contains(optionCode)) //Condizione per decretare effettivamente quale risposta ha scelto l'utente
 				givenAnswer = answerIterator;
 				break;
 		}
 		return givenAnswer;
-	}*/  //questa l ho commentata perchè è una funziona risarvata alle interfacce
+	}  //questa l ho commentata perchè è una funziona risarvata alle interfacce
 	
 	//Metodo per verificare se la conversazione è giunta praticamente al termine
 	private boolean isLastQuestion(Answer answerGiven) {
@@ -97,11 +93,6 @@ public class Conversation extends Observable{
 			return true;
 		else
 			return false;
-	}
-	
-	/*questo metodo fa partire la conversazione*/
-	public void beginConversation() {
-		problemFinder();
 	}
 	
 	/*Questo metodo gestisce essenzialmente il botta e risposta tra client e server.*/
@@ -139,4 +130,25 @@ public class Conversation extends Observable{
 	public String getQuestionText() {
 		return qst.getText();
 	}
+	
+	
+	/*Metodo privato da richiamare nel costruttore per far selezionare all'utente l'elettrodomestico.
+	 *Restituisce una stringa che rappresenta il codice del prodotto. Questa quindi andr� a sovrascrivere il currentCode, che all'inizio della conversazione
+	 *� impostato a 0, codice della prima domanda in assoluto.
+	 *F per frigo, L per lavatrice...*/
+	private String applianceSelector() {
+		//Per il momento � vuoto perch� ci occupiamo solo del frigo.		
+		return "F"; //Hard-code del valore F(rigo).
+	}
+	
+	
+	
+	//DEBUG
+	public static void main(String[] args) {
+		Conversation conv = new Conversation();
+		System.out.println(conv.getQuestionText());
+		System.out.println(conv.qst.getOptions().size());
+		conv.readAnswer();
+	}
+
 }

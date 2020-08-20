@@ -12,8 +12,6 @@ public class Question {
 	public Question(String code) {
 		this.code=code;
 		options=new ArrayList<>();
-		//QUI CI SARA' IL METODO CHE PRENDE LE INFO DAL DB
-		//STESSA COSA CON LE OPTIONS
 	}
 
 	public String getCode() {

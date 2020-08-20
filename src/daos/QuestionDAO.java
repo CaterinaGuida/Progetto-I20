@@ -36,7 +36,9 @@ public class QuestionDAO {
 		DBConnection.closeConnection(conn);
 		return text;
 	}
-	public HashMap<String,Question> getQuestions(String code) { //metodo per restituire testo dato codice 
+	
+	
+	public HashMap<String,Question> getQuestions(String code) {
 		PreparedStatement st1=null;
 		ResultSet rs1 = null;
 		Question q=null;
