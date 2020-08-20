@@ -131,6 +131,13 @@ public class Conversation extends Observable{
 		//Qui o in un altro metodo da richiamare sempre qua, ci andrebbe il codice per mostrare la soluzione.
 	}
 	
+	public void next() {
+		if (!isLastQuestion(ans)) 
+			nextQuestion(qst, ans.getCode()); //In caso non lo fosse, aggiorno la domanda
+		else
+			setFoundASolution(true);
+	}
+	
 	//Commentare questi metodi.
 	public void setAnswerReady(Answer ans){
 		this.ans=ans;
