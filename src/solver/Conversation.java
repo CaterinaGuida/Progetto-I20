@@ -54,19 +54,19 @@ public class Conversation extends Observable{
 	/*Pre-condizione : question e optionCode sono inizializzati.
 	 *Implementazione: Questa rivisitazione del metodo nextQuestion calcola il codice della domanda successiva, lo assegna alla
 	 *variabile currentCode della classe Conversation e, sempre col medesimo codice appena calcolato, interroga la tabella di Hash
-	 *affinchè restituisca l'oggetto Question pertinente.*/
+	 *affinchï¿½ restituisca l'oggetto Question pertinente.*/
 	private void nextQuestion(Question question, String optionCode) { 
 		String newCode = question.getCode() + optionCode;
 		this.currentCode = newCode;
 		this.qst = applianceTable.questionTable.get(newCode);
 	}
 
+	/*Se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
+	 *togliendo l'ultima cifra, restituendo cosÃ¬ la domanda precedente*/
 	private void prevQuestion(Question question) {
-		String oldCode=question.getCode().substring(0, question.getCode().length());
-		question.setCode(oldCode);		//se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
-		this.setCurrentCode(oldCode);		//togliendo l'ultima cifra, restituendo cosi la domanda precedente
-
-		this.qst=question;
+		String oldCode = question.getCode().substring(0, question.getCode().length());
+		this.currentCode = oldCode;
+		this.qst = applianceTable.questionTable.get(oldCode);		
 	}
 
 	/*Pre-condizione: l'attributo qst di tipo Question Ã¨ stato giÃ  inizializzato.
@@ -133,21 +133,26 @@ public class Conversation extends Observable{
 	
 	
 	/*Metodo privato da richiamare nel costruttore per far selezionare all'utente l'elettrodomestico.
-	 *Restituisce una stringa che rappresenta il codice del prodotto. Questa quindi andrà a sovrascrivere il currentCode, che all'inizio della conversazione
-	 *è impostato a 0, codice della prima domanda in assoluto.
+	 *Restituisce una stringa che rappresenta il codice del prodotto. Questa quindi andrï¿½ a sovrascrivere il currentCode, che all'inizio della conversazione
+	 *ï¿½ impostato a 0, codice della prima domanda in assoluto.
 	 *F per frigo, L per lavatrice...*/
 	private String applianceSelector() {
-		//Per il momento è vuoto perché ci occupiamo solo del frigo.		
+		//Per il momento ï¿½ vuoto perchï¿½ ci occupiamo solo del frigo.		
 		return "F"; //Hard-code del valore F(rigo).
 	}
 	
-	
+	//Metodo per mostrare le opzioni della domanda in questione
+	private void displayOptions(Question qst) {
+		for (Answer a:qst.getOptions()) 
+			System.out.println(a.toString());
+	}
 	
 	//DEBUG
 	public static void main(String[] args) {
 		Conversation conv = new Conversation();
 		System.out.println(conv.getQuestionText());
-		System.out.println(conv.qst.getOptions().size());
+		conv.displayOptions(conv.qst); //@TODO: Non so perchÃ© ma stampa le domande in ordine questo ordine: 1 - 3 - 2. o.O
+		
 		conv.readAnswer();
 	}
 

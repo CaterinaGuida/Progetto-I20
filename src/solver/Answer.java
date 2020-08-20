@@ -33,6 +33,6 @@ public class Answer {
 		//possibilita di modifica il testo (forse inutile)
 	}
 	public String toString() {
-		return code+" "+text;
+		return code+") "+text;
 	}
 }
