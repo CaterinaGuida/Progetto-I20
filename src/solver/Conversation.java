@@ -27,7 +27,7 @@ public class Conversation extends Observable{
 	 */
 	
 	public Conversation(Question firstQuestion) {
-		this.currentCode = firstQuestion.getCode();
+		this.currentCode = firstQuestion.getCode(); //cambiare costruttore 
 		this.qst=firstQuestion;
 		this.foundASolution = false;
 	}
@@ -40,11 +40,6 @@ public class Conversation extends Observable{
 	public void setCurrentCode(String currentCode) {
 		this.currentCode = currentCode;
 	}
-	public void setSolution(String code) {
-		SolutionDAO solution=new SolutionDAO();
-		this.solution=solution.getText(code);
-	}
-
 	public boolean isFoundASolution() {
 		return foundASolution;
 	}
@@ -54,7 +49,9 @@ public class Conversation extends Observable{
 	}
 
 	public String getSolution() {
-		return solution;
+		SolutionDAO solution=new SolutionDAO();
+		this.solution=solution.getText(this.currentCode+this.ans.getCode());
+		return this.solution;
 	}
 
 	public void nextQuestion(Question question, String optionCode) { //permette di modificare il contenuto della domanda in base a
@@ -122,7 +119,6 @@ public class Conversation extends Observable{
 				nextQuestion(qst, ans.getCode()); //In caso non lo fosse, aggiorno la domanda
 			else
 				setFoundASolution(true);
-			
 		}
 		
 		setChanged();
