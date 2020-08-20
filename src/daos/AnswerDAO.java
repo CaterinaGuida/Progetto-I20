@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import solver.Answer;
-
+// CLASSE DA ELIMINARE L'ACCESSO AL DB VIENE INTERAMENTE GESTITO DA QuetionDAO
 public class AnswerDAO {
 	private Connection conn;
 	public AnswerDAO() {
-		conn=DBConnection.startConnection(conn);
+		conn=DBConnection.startConnection(conn); // si potrebbe eliminaree dato che non ci serve più 
 	}
 	
 	public ArrayList<Answer> getAnswer(String codQ) { //metodo per restituire testo dato codice

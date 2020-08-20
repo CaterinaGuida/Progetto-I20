@@ -11,6 +11,7 @@ public class Question {
 	
 	public Question(String code) {
 		this.code=code;
+		options=new ArrayList<>();
 		//QUI CI SARA' IL METODO CHE PRENDE LE INFO DAL DB
 		//STESSA COSA CON LE OPTIONS
 	}
@@ -42,10 +43,20 @@ public class Question {
 		String text = qstDAO.getText(this.code);
 		this.text=text;
 	}
-
+	public void setText(String text) {
+		this.text=text;
+	}
 	public void setOptions() {
 		AnswerDAO answer=new AnswerDAO();
 		this.options=answer.getAnswer(this.code);
 	}
-
+	public void AddOption(Answer a) {
+		options.add(a);
+	}
+	public String toString() {
+		String s=this.code+" "+text;
+		for(Answer a:options)
+			s+="\n"+a.toString();
+		return s;
+	}
 }
