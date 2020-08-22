@@ -1,19 +1,18 @@
 <!DOCTYPE html> 
 <html> 
-
-<script>
-
-</script>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
   <body>  
+  <h1>Enter your feedback</h1>
     <form action="/genfeedback" method="get">
-    	<input type="checkbox" name="satisfaction">I am satisfied</input>
-    	
-    	<div id="textarea">
-    		<textarea name="satText" rows="4" cols="50">
-    		
-			</textarea>
-    	</div>
+    	<input type="checkbox" id="satisf" name="satisfaction">I am satisfied</input>
+    	<br><p>Mail: </p>
+    	<input name="feedMail"></input>
+    	<br><p>Name: </p>
+    	<input name="feedName"></input>
+    	<br><br>
+    	<textarea name="feedText" rows="4" cols="50">insert yout text here</textarea>
+    	<br>
+    	<button type="submit">Send Feedback</button>
     
     </form>
     

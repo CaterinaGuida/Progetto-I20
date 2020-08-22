@@ -47,6 +47,8 @@ public class SolverServlet extends HttpServlet {
 			}
 		}else if(req.getPathInfo().equals("/solution")) {
 			resp.getWriter().write(Rythm.render("solution.rtm", sf.getSolution()));
+		}else if(req.getPathInfo().equals("/feedback")) {
+			resp.getWriter().write(Rythm.render("feedback.rtm",null));
 		}else {
 			resp.getWriter().write(Rythm.render("welcome.rtm",null));
 		}

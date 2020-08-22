@@ -4,10 +4,10 @@
 }
 <!DOCTYPE html> 
 <html> 
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
   <body>  
     <form method="get" action="/saveqst">	 
-      <h3>@(qText)</h3> 
+      <h2>@(qText)</h2> 
       <select name="answ">
       @for (String it: options) {
 		<option value="@(it)">@(it)</option> 
