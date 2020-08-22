@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.SolverFacade;
 import controller.SolverSignals;
-
+import org.rythmengine.Rythm;
 
 public class SolverServlet extends HttpServlet {
 	private SolverFacade sf;
@@ -18,23 +18,6 @@ public class SolverServlet extends HttpServlet {
 	public SolverServlet(SolverFacade sf) {
 		// TODO Auto-generated constructor stub
 		this.sf=sf;
-	}
-	
-	private void genSolutionPage(HttpServletResponse resp) throws IOException {
-		resp.getWriter().write("<h1>"+sf.getSolution()+"</h1>");
-	}
-	
-	private void buildAnswersForm(HttpServletResponse resp, ArrayList<String> options) throws IOException {
-		
-		resp.getWriter().write("<form method=\"get\" action=\"/saveqst\"><br>");
-		resp.getWriter().write("<select name=\"answ\" id=\"answ\">");
-		
-		for(String s: options) {
-			resp.getWriter().write("<option value=\""+s+"\">"+s+"</option>");
-			resp.getWriter().write("<br>");
-		}
-		resp.getWriter().write("<input type=\"submit\" value=\"Next Question\"/>");
-		resp.getWriter().write("</form>");
 	}
 
 	private void saveResp(HttpServletRequest req) {
@@ -59,13 +42,13 @@ public class SolverServlet extends HttpServlet {
 			if(sf.isFoundASolution()) {
 				resp.sendRedirect("/solution");
 			}else {
-				resp.getWriter().write("<h1>"+sf.retreiveQuestionText()+"</h1>");
-				buildAnswersForm(resp, sf.retreiveQuestionOptions());
+				String rend= Rythm.render("question.rtm",sf.retreiveQuestionText(),sf.retreiveQuestionOptions());
+				resp.getWriter().write(rend);
 			}
 		}else if(req.getPathInfo().equals("/solution")) {
-			genSolutionPage(resp);
+			resp.getWriter().write(Rythm.render("solution.rtm", sf.getSolution()));
 		}else {
-			resp.getWriter().write("<h1>Benvenuto il pennuto</h1><br><a href=\"/nextqst\">Clicca per cominciare</a>");
+			resp.getWriter().write(Rythm.render("welcome.rtm",null));
 		}
 	
 	}

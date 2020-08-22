@@ -1,0 +1,19 @@
+@args() {
+	String qText,
+	List<String> options
+}
+<!DOCTYPE html> 
+<html> 
+<link rel="stylesheet" type="text/css" href="style.css">
+  <body>  
+    <form method="get" action="/saveqst">	 
+      <h3>@(qText)</h3> 
+      <select name="answ">
+      @for (String it: options) {
+		<option value="@(it)">@(it)</option> 
+	  } 
+      </select><br>
+      <button type="submit">Next Question</button>
+    </form>
+  </body> 
+</html>

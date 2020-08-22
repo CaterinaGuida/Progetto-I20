@@ -1,0 +1,12 @@
+@args() {
+	String sText;
+}
+<!DOCTYPE html> 
+<html> 
+<link rel="stylesheet" type="text/css" href="style.css">
+  <body>  
+    <h2> Ah ho capito!</h2>
+    <h3> @(sText)</h3>
+    
+  </body> 
+</html>

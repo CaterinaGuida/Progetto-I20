@@ -9,6 +9,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.rythmengine.Rythm;
 
 public class ApplicationServer {
 
@@ -22,6 +23,7 @@ public class ApplicationServer {
     }
 
     public void start() throws Exception {
+    	initTemplateEngine();
         server = new Server(port);
         ServletContextHandler handler = new ServletContextHandler();
         handler.addServlet(new ServletHolder(servlet), "/*");
@@ -33,13 +35,19 @@ public class ApplicationServer {
     public void stop() throws Exception {
         server.stop();
     }
+    
+    private void initTemplateEngine() {
+        Map<String, Object> conf = new HashMap<>();
+        conf.put("home.template", "assets/templates");
+        Rythm.init(conf);
+    }
   
     private void addStaticFileServing(ServletContextHandler handler) {
         ServletHolder holderPwd = new ServletHolder("default", new DefaultServlet());
-        holderPwd.setInitParameter("resourceBase", "./src/webres/resources");
+        holderPwd.setInitParameter("resourceBase", "./src/assets");
         holderPwd.setInitParameter("dirAllowed","false");
         holderPwd.setInitParameter("pathInfoOnly","true");
-        handler.addServlet(holderPwd, "/r/*");
+        handler.addServlet(holderPwd, "/assets/*");
     }
 }
 

@@ -1,0 +1,8 @@
+<!DOCTYPE html> 
+<html> 
+<link rel="stylesheet" type="text/css" href="style.css">
+  <body>  
+    <h1> Benvenuto sul problem solver</h1>
+    <a href="/nextqst"><h3>Clicca qui per iniziare</h3></a>
+  </body> 
+</html>

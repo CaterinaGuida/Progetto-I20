@@ -1,0 +1,21 @@
+<!DOCTYPE html> 
+<html> 
+
+<script>
+
+</script>
+<link rel="stylesheet" type="text/css" href="style.css">
+  <body>  
+    <form action="/genfeedback" method="get">
+    	<input type="checkbox" name="satisfaction">I am satisfied</input>
+    	
+    	<div id="textarea">
+    		<textarea name="satText" rows="4" cols="50">
+    		
+			</textarea>
+    	</div>
+    
+    </form>
+    
+  </body> 
+</html>
