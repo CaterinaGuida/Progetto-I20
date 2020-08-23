@@ -3,6 +3,6 @@
 <link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
   <body>  
     <h1> Benvenuto sul problem solver</h1>
-    <a href="/nextqst"><h3>Clicca qui per iniziare</h3></a>
+   <button onclick="window.location.href='/nextqst'">Clicca qui per iniziare</button>
   </body> 
 </html>
