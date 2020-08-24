@@ -35,18 +35,8 @@ public class Question {
 		this.code = code;
 		//mi rende possibile modificare il codice
 	}
-
-	public void setText() {
-		QuestionDAO qstDAO = new QuestionDAO();
-		String text = qstDAO.getText(this.code);
-		this.text=text;
-	}
 	public void setText(String text) {
 		this.text=text;
-	}
-	public void setOptions() {
-		AnswerDAO answer=new AnswerDAO();
-		this.options=answer.getAnswer(this.code);
 	}
 	public void AddOption(Answer a) {
 		options.add(a);
