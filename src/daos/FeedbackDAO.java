@@ -12,9 +12,9 @@ public class FeedbackDAO {
 			conn=DBConnection.startConnection(conn);
 			String query="insert into feedback (`contatto`, `description`, `id_product`)values (?,?,?)";
 			st1=conn.prepareStatement(query);
-			st1.setString(1, "prova");
-			st1.setString(2, "Enrico");
-			st1.setString(3, "F");
+			st1.setString(1, description);
+			st1.setString(2, contatto);
+			st1.setString(3, id_prodotto);
 			st1.executeUpdate();
 			st1.close();
 		}

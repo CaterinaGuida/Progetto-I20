@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import controller.util.ConversationUtil;
+import daos.FeedbackDAO;
 import solver.Conversation;
 
 public class SolverFacade{
@@ -33,5 +34,9 @@ public class SolverFacade{
 	
 	public String getSolution() {
 		return conv.getSolution();
+	}
+	
+	public void sendSolverFeedback(String name, String feedText, String pr_id) {
+		FeedbackDAO.saveFeedback(feedText, name, pr_id);
 	}
 }
