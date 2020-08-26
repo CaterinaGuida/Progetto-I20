@@ -7,9 +7,7 @@
     	<input type="checkbox" id="satisf" name="satisfaction">I am satisfied</input>
     	<br><p>Mail: </p>
     	<input name="feedMail"></input>
-    	<br><p>Name: </p>
-    	<input name="feedName"></input>
-    	<br><br>
+    	<br><p>
     	<textarea name="feedText" rows="4" cols="50">insert yout text here</textarea>
     	<br>
     	<button type="submit">Send Feedback</button>

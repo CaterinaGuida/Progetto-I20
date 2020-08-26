@@ -50,7 +50,7 @@ public class SolverServlet extends HttpServlet {
 		}else if(req.getPathInfo().equals("/feedback")) {
 			resp.getWriter().write(Rythm.render("feedback.rtm",null));
 		}else if(req.getPathInfo().equals("/genfeedback")) {
-			sf.sendSolverFeedback(req.getParameter("feedName"), req.getParameter("feedText"), "F");
+			sf.sendSolverFeedback(req.getParameter("feedMail"), req.getParameter("feedText"), "F");
 			resp.sendRedirect("/");
 		}else {
 			resp.getWriter().write(Rythm.render("welcome.rtm",null));
