@@ -11,7 +11,9 @@ import webui.server.SolverServlet;
 public class Test {
 
 	public static void main(String[] args) {
-		Question q= new Question("F12");
+		Boolean b=true;
+		System.out.println(b.toString());
+		Question q= new Question("F");
 		q.setText();
 		q.setOptions();
 		
