@@ -50,7 +50,12 @@ public class SolverServlet extends HttpServlet {
 		}else if(req.getPathInfo().equals("/feedback")) {
 			resp.getWriter().write(Rythm.render("feedback.rtm",null));
 		}else if(req.getPathInfo().equals("/genfeedback")) {
-			sf.sendSolverFeedback(req.getParameter("feedMail"), req.getParameter("feedText"), "F");
+			//
+			
+			boolean sati = Boolean.parseBoolean(req.getParameter("satisf"));
+			
+			//la "F" è provvisoria perchè il solver facade deve poter prendere il tipo di conversazione da conversation
+			sf.sendSolverFeedback(req.getParameter("feedMail"), req.getParameter("feedText"), "F", sati);
 			resp.sendRedirect("/");
 		}else {
 			resp.getWriter().write(Rythm.render("welcome.rtm",null));
