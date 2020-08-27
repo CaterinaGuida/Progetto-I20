@@ -58,6 +58,7 @@ public class Conversation extends Observable{
 		String newCode = question.getCode() + optionCode;				//cosa ha scelto l'utente, se ha scelto di risondere
 		question.setCode(newCode);
 		this.currentCode = newCode;
+		question.setProduct();
 		question.setText(); //Aggiunto questo metodo così da aggiornare anche il testo della domanda oltre al codice.
 		question.setOptions(); //Aggiunto questo metodo così da aggiornare anche le risposte possibili associate alla domanda.
 		this.qst=question;
@@ -68,6 +69,7 @@ public class Conversation extends Observable{
 		String oldCode=question.getCode().substring(0, question.getCode().length());
 		question.setCode(oldCode);		//se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
 		this.setCurrentCode(oldCode);
+		question.setProduct();
 		question.setText(); //Aggiunto questo metodo così da aggiornare anche il testo della domanda oltre al codice.
 		question.setOptions();//togliendo l'ultima cifra, restituendo cosi la domanda precedente
 		this.qst=question;

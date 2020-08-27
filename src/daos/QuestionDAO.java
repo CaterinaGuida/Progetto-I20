@@ -13,7 +13,24 @@ public class QuestionDAO {
 	public QuestionDAO() {
 		conn=DBConnection.startConnection(conn);
 	}
-	
+	public String getProduct(String cod) {
+		PreparedStatement st1=null;
+		ResultSet rs1 = null;
+		String product=null;		
+		try {					
+			String query="SELECT id_product FROM question WHERE ID = '"+cod+"'";
+			st1=conn.prepareStatement(query);
+			rs1=st1.executeQuery(query);
+			if(rs1.next())
+				product=rs1.getString(1);
+			st1.close();
+			rs1.close();
+		}
+		catch (Exception e) {e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);
+		return product;
+	}
 	public String getText(String cod) { //metodo per restituire testo dato codice
 		PreparedStatement st1=null;
 		ResultSet rs1 = null;
