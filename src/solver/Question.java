@@ -8,6 +8,7 @@ public class Question {
 	private String code;
 	private String text;
 	private ArrayList<Answer> options;
+	private String prod_id;
 	
 	public Question(String code) {
 		this.code=code;
@@ -31,6 +32,11 @@ public class Question {
 		//mi da l'array delle opzioni
 
 	}
+	
+	public String getProdID() {
+		return prod_id;
+		//mi da il prouduct id
+	}
 
 	public void setCode(String code) {
 		this.code = code;
@@ -46,6 +52,10 @@ public class Question {
 	public void setOptions() {
 		AnswerDAO answer=new AnswerDAO();
 		this.options=answer.getAnswer(this.code);
+	}
+	
+	public void setProdID() {
+		//chiama il metodo di question dao che mi da il prod id
 	}
 
 }

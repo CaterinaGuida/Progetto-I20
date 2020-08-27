@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 
+import daos.FeedbackDAO;
 import daos.SolutionDAO;
 
 @SuppressWarnings("deprecation")
@@ -133,6 +134,11 @@ public class Conversation extends Observable{
 			nextQuestion(qst, ans.getCode()); //In caso non lo fosse, aggiorno la domanda
 		else
 			setFoundASolution(true);
+	}
+	
+	public void callFeedback(boolean sat, String sugg, String mail) {
+		String prod_id = qst.getProdID();
+		Feedback fb = new Feedback(sat, sugg, mail, prod_id);
 	}
 	
 	
