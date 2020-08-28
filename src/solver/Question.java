@@ -5,7 +5,7 @@ import daos.AnswerDAO;
 import daos.QuestionDAO;
 
 public class Question {
-	private String code;
+	private String code,product;
 	private String text;
 	private ArrayList<Answer> options;
 	private String prod_id;
@@ -15,7 +15,12 @@ public class Question {
 		//QUI CI SARA' IL METODO CHE PRENDE LE INFO DAL DB
 		//STESSA COSA CON LE OPTIONS
 	}
-
+	public String getProduct() {
+		return product;
+	}
+	public void setProduct() {
+		this.product= new QuestionDAO().getProduct(code);
+	}
 	public String getCode() {
 		return code;
 		//mi da il codice della domanda

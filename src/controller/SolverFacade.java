@@ -36,7 +36,7 @@ public class SolverFacade{
 		return conv.getSolution();
 	}
 	
-	public void sendSolverFeedback(String name, String feedText, String pr_id, boolean sati) {
-		FeedbackDAO.saveFeedback(feedText, name, pr_id, sati);
+	public void sendSolverFeedback(String contact, String feedText, boolean sati) {
+		conv.callFeedback(sati, feedText, contact);
 	}
 }
