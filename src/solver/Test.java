@@ -13,11 +13,7 @@ public class Test {
 	public static void main(String[] args) {
 		Boolean b=true;
 		System.out.println(b.toString());
-		Question q= new Question("0F");
-		q.setText();
-		q.setOptions();
-		
-		Conversation conv= new Conversation(q);
+		Conversation conv= new Conversation();
 		
 		/*
 		GuiController cnt= new GuiController(new CliUI(), conv);

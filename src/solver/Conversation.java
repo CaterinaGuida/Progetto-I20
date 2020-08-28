@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Scanner;
 
 import daos.FeedbackDAO;
+import daos.QuestionDAO;
 import daos.SolutionDAO;
 
 @SuppressWarnings("deprecation")
@@ -16,20 +17,16 @@ public class Conversation extends Observable{
 	//ogni volta dai vari metodi
 	private Question qst;
 	private Answer ans;
-
-
-	public Conversation() {
-		//Costruttore inutile, lasciato bianco a posta.
-	} //comunicare con fra molte cose non chiare 
 	
 	/*Pre-condizione: FirstQuestion è una domanda non vuota.
 	 *Implementazione: Il costruttore prende come parametro un oggetto di tipo Question, ne legge il codice e lo assegna alla variabile currentCode.
 	 *Post-condizione: L'oggetto conversazione così istanziato "punterà" alla prima domanda".
 	 */
 	
-	public Conversation(Question firstQuestion) {
-		this.currentCode = firstQuestion.getCode(); //cambiare costruttore 
-		this.qst=firstQuestion;
+	public Conversation() {
+		QuestionDAO q=new QuestionDAO();
+		this.qst=q.getFirstQuestion();
+		this.currentCode =qst.getCode(); //cambiare costruttore 
 		this.foundASolution = false;
 	}
 	
