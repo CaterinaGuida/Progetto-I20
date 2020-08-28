@@ -136,7 +136,7 @@ public class Conversation extends Observable{
 	}
 	
 	public void callFeedback(boolean sat, String sugg, String mail) {
-		String prod_id = qst.getProdID();
+		String prod_id = qst.getProduct();
 		Feedback fb = new Feedback(sat, sugg, mail, prod_id);
 	}
 	

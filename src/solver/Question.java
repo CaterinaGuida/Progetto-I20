@@ -8,7 +8,6 @@ public class Question {
 	private String code,product;
 	private String text;
 	private ArrayList<Answer> options;
-	private String prod_id;
 	
 	public Question(String code) {
 		this.code=code;
@@ -41,12 +40,6 @@ public class Question {
 		//mi da l'array delle opzioni
 
 	}
-	
-	public String getProdID() {
-		return prod_id;
-		//mi da il prouduct id
-	}
-
 	public void setCode(String code) {
 		this.code = code;
 		//mi rende possibile modificare il codice
