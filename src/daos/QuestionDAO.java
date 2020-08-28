@@ -20,9 +20,35 @@ public class QuestionDAO {
 	public HashMap<String,Question> getQuestions(String code) {
 		PreparedStatement st1=null;
 		ResultSet rs1 = null;
-		Question q=null;
+		Question q=new Question("0");
 		HashMap<String,Question> questions=new HashMap<>();
 		try {					
+			String query="SELECT text FROM question WHERE ID = '0'";
+			st1=conn.prepareStatement(query);
+			rs1=st1.executeQuery(query);
+			if(rs1.next()) {
+				q.setText(rs1.getString(1));
+			}
+			st1.close();
+			rs1.close();
+		}
+		catch (Exception e) {e.printStackTrace();
+		}
+		try {					
+			String query="SELECT * FROM product";
+			st1=conn.prepareStatement(query);
+			rs1=st1.executeQuery(query);
+			while(rs1.next()) {
+				q.AddOption(new Answer(rs1.getString("ID"),rs1.getString("name")));
+			}
+			st1.close();
+			rs1.close();
+		}
+		catch (Exception e) {e.printStackTrace();
+		}
+		questions.put("0", q);
+		q=null;
+		try {	
 			String query="SELECT ID,question.text as question,num,answer.text as answer,id_question FROM	question,answer WHERE	ID=id_question and id_product='"+code+"' order by ID";
 			st1=conn.prepareStatement(query);
 			rs1=st1.executeQuery(query);
@@ -53,6 +79,6 @@ public class QuestionDAO {
 	public static void main(String[] args) {
 		QuestionDAO q=new QuestionDAO();
 		HashMap<String,Question> prova=q.getQuestions("F");
-		System.out.println(prova.get("F22122").toString());
+		System.out.println(prova.get("0F").toString());
 	}
 }
