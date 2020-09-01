@@ -76,9 +76,4 @@ public class QuestionDAO {
 		DBConnection.closeConnection(conn);
 		return questions;
 	}
-	public static void main(String[] args) {
-		QuestionDAO q=new QuestionDAO();
-		HashMap<String,Question> prova=q.getQuestions("F");
-		System.out.println(prova.get("0F").toString());
-	}
 }
