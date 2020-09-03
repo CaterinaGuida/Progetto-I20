@@ -11,6 +11,7 @@ import webui.server.SolverServlet;
 public class Test {
 
 	public static void main(String[] args) {
+
 		Boolean b=true;
 		System.out.println(b.toString());
 		Conversation conv= new Conversation();
@@ -27,5 +28,12 @@ public class Test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+				
+//		GuiController cnt= new GuiController(new CliUI(), conv);
+//		conv.addObserver(cnt);
+//		
+//		conv.beginConversation();
+
 	}
 }

@@ -9,9 +9,8 @@ public class Question {
 	public Question(String code) {
 		this.code=code;
 		options=new ArrayList<>();
-		//QUI CI SARA' IL METODO CHE PRENDE LE INFO DAL DB
-		//STESSA COSA CON LE OPTIONS
 	}
+	
 	public String getProduct() {
 		return product;
 	}
@@ -36,16 +35,19 @@ public class Question {
 		this.code = code;
 		//mi rende possibile modificare il codice
 	}
+
 	public void setText(String txt) {
 		this.text=txt;
 	}
 	public void addOption(Answer a) {
 		this.options.add(a);
 	}
+	
+
 	public String toString() {
-		String s= code+" "+text+" "+product+"\n";
+		String s=this.code+" "+text;
 		for(Answer a:options)
-			s+=a.toString()+"\n";
+			s+="\n"+a.toString();
 		return s;
 	}
 }

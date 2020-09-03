@@ -15,7 +15,9 @@ public class QuestionDAO {
 	public QuestionDAO() {
 		conn=DBConnection.startConnection(conn);
 	}
+	
 	public HashMap<String,Question> getQuestions() {
+
 		PreparedStatement st1=null;
 		ResultSet rs1 = null;
 		Question q=new Question("0");
@@ -57,9 +59,8 @@ public class QuestionDAO {
 			q.setProduct(rs1.getString("id_product"));
 			questions.put(rs1.getString("ID"), q);
 			while(rs1.next()) {
-				if(questions.containsKey(rs1.getString("ID"))) {
+				if(questions.containsKey(rs1.getString("ID")))
 					questions.get(rs1.getString("ID")).addOption(new Answer(rs1.getString("num"),rs1.getString("answer")));
-				}
 				else {
 					q=new Question(rs1.getString("ID"));
 					q.setText(rs1.getString("question"));
