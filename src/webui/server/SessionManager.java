@@ -2,6 +2,8 @@ package webui.server;
 
 import java.util.HashMap;
 
+import org.solver.application.SolverApplication;
+
 import controller.SolverFacade;
 import solver.Conversation;
 
@@ -18,7 +20,8 @@ public class SessionManager {
 	
 	public String genNewSession() {
 		String sid = genSessionId();
-		sessions.put(sid, new SolverFacade(new Conversation()));//provvisorio va raffinato
+		
+		sessions.put(sid, SolverApplication.getIstance().requestNewSolver());
 		return sid;
 	}
 	

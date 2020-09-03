@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.SolverFacade;
-import controller.SolverSignals;
 import org.rythmengine.Rythm;
 
 public class SolverServlet extends HttpServlet {
@@ -40,7 +39,7 @@ public class SolverServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if (req.getPathInfo().equals("/prevqst")) {
-			System.out.println("Sono tornato stronzi!!!!");
+			
 			SolverFacade sf=sm.getSessionFromId(getSid(req));
 			sf.goPrevious();
 			System.out.println(sf.retreiveQuestionText());
@@ -48,6 +47,7 @@ public class SolverServlet extends HttpServlet {
 			resp.getWriter().write(rend);
 		}
 		else if (req.getPathInfo().equals("/saveqst")) {
+			
 			SolverFacade sf=sm.getSessionFromId(getSid(req));
 			System.out.println(req.getParameter("answ"));
 			sf.sendAnswer(req.getParameter("answ"));
@@ -65,15 +65,14 @@ public class SolverServlet extends HttpServlet {
 				resp.getWriter().write(rend);
 			}
 		}else if(req.getPathInfo().equals("/solution")) {
+			
 			resp.getWriter().write(Rythm.render("solution.rtm", sm.getSessionFromId(getSid(req)).getSolution()));
 		}else if(req.getPathInfo().equals("/feedback")) {
+			
 			resp.getWriter().write(Rythm.render("feedback.rtm",null));
 		}else if(req.getPathInfo().equals("/genfeedback")) {
-			//
-			
 			boolean sati = Boolean.parseBoolean(req.getParameter("satisf"));
 			
-			//la "F" è provvisoria perchè il solver facade deve poter prendere il tipo di conversazione da conversation
 			SolverFacade sf=sm.getSessionFromId(getSid(req));
 			sf.sendSolverFeedback(req.getParameter("feedMail"), req.getParameter("feedText"), sati);
 			resp.sendRedirect("/");
