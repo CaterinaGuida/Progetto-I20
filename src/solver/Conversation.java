@@ -68,7 +68,7 @@ public class Conversation extends Observable{
 	 *togliendo l'ultima cifra, restituendo così la domanda precedente*/
 	
 	public void prevQuestion() {
-		String oldCode = qst.getCode().substring(0, qst.getCode().length());
+		String oldCode = qst.getCode().substring(0, qst.getCode().length() - 1);
 		this.currentCode = oldCode;
 		this.qst = applianceTable.questionTable.get(oldCode);
 	}

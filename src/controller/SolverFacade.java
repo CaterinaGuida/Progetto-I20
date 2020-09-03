@@ -15,11 +15,13 @@ public class SolverFacade{
 		conv.setAnswerReady(ConversationUtil.fromStringToAnswer(s, conv.getAnswersList()));
 	}
 	
-	public void sendSignal(SolverSignals si) {
-		if(si.equals(SolverSignals.NEXTQ))
+	public void goNext() {
 			conv.nextQuestion();
-		else if (si.equals(SolverSignals.PREVQ))
-			conv.prevQuestion();
+		
+	}
+	
+	public void goPrevious() {
+		conv.prevQuestion();
 	}
 	
 	public String retreiveQuestionText() {

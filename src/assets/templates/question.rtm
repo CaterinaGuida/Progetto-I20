@@ -13,10 +13,13 @@
 		<option value="@(it)">@(it)</option> 
 	  } 
       </select><br>
-      <button onclick="window.location.href='/prevqst'">Previous Question</button>
       <button type="submit">Next Question</button>
       
-    </form><br><br><br>
+    </form>
+    <form action="/prevqst">
+      <button type="submit">Previous Question</button>
+      </form>
+    <br><br><br>
     <p> Non sei soddisfatto? <a href="/feedback">lascia un feedback</a></p>
   </body> 
 </html>
