@@ -25,7 +25,7 @@ public class Conversation extends Observable{
 	
 	public Conversation() {
 		QuestionDAO q=new QuestionDAO();
-		this.qst=q.getFirstQuestion();
+		this.qst=q.getFirstQuestion();  // DA errore perchè sono stati modificati i metodi di QuestionDAO per il merge dei due branch
 		this.currentCode =qst.getCode(); //cambiare costruttore 
 		this.foundASolution = false;
 	}

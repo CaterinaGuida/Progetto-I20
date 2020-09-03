@@ -1,9 +1,6 @@
 package solver;
 import java.util.ArrayList;
 
-import daos.AnswerDAO;
-import daos.QuestionDAO;
-
 public class Question {
 	private String code,product;
 	private String text;
@@ -18,9 +15,6 @@ public class Question {
 	public String getProduct() {
 		return product;
 	}
-	public void setProduct() {
-		this.product= new QuestionDAO().getProduct(code);
-	}
 	public void setProduct(String prod) {
 		this.product= prod;
 	}
@@ -28,13 +22,11 @@ public class Question {
 		return code;
 		//mi da il codice della domanda
 	}
-
 	public String getText() {
 		return text;
 		//mi da il testo della domada
 
 	}
-
 	public ArrayList<Answer> getOptions() {
 		return options;
 		//mi da l'array delle opzioni
@@ -44,25 +36,16 @@ public class Question {
 		this.code = code;
 		//mi rende possibile modificare il codice
 	}
-
-	public void setText() {
-		QuestionDAO qstDAO = new QuestionDAO();
-		String text = qstDAO.getText(this.code);
-		this.text=text;
-	}
 	public void setText(String txt) {
 		this.text=txt;
 	}
 	public void addOption(Answer a) {
 		this.options.add(a);
 	}
-	public void setOptions() {
-		AnswerDAO answer=new AnswerDAO();
-		this.options=answer.getAnswer(this.code);
+	public String toString() {
+		String s= code+" "+text+" "+product+"\n";
+		for(Answer a:options)
+			s+=a.toString()+"\n";
+		return s;
 	}
-	
-	public void setProdID() {
-		//chiama il metodo di question dao che mi da il prod id
-	}
-
 }
