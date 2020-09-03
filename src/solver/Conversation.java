@@ -54,16 +54,20 @@ public class Conversation extends Observable{
 	 *Implementazione: Questa rivisitazione del metodo nextQuestion calcola il codice della domanda successiva, lo assegna alla
 	 *variabile currentCode della classe Conversation e, sempre col medesimo codice appena calcolato, interroga la tabella di Hash
 	 *affinch� restituisca l'oggetto Question pertinente.*/
-	private void nextQuestion(Question question, String optionCode) { 
-		String newCode = question.getCode() + optionCode;
-		this.currentCode = newCode;
-		this.qst = applianceTable.questionTable.get(newCode);
+	public void nextQuestion() {
+		String newCode = qst.getCode() + ans.getCode();
+		if (!isLastQuestion(ans)) {
+			this.currentCode = newCode;
+			this.qst = applianceTable.questionTable.get(newCode);
+		}
+		else
+			setFoundASolution(true);
 	}
 
 	/*Se l'utente ha deciso di non rispondere e di tornare indietro, modifica il codice 
 	 *togliendo l'ultima cifra, restituendo così la domanda precedente*/
 	
-	private void prevQuestion() {
+	public void prevQuestion() {
 		String oldCode = qst.getCode().substring(0, qst.getCode().length());
 		this.currentCode = oldCode;
 		this.qst = applianceTable.questionTable.get(oldCode);
@@ -107,7 +111,7 @@ public class Conversation extends Observable{
 			
 			//Verifico se è l'ultima domanda
 			if (!isLastQuestion(ans)) 
-				nextQuestion(qst, ans.getCode()); //In caso non lo fosse, aggiorno la domanda
+				nextQuestion(); //In caso non lo fosse, aggiorno la domanda
 			else
 				setFoundASolution(true);
 		}
@@ -118,12 +122,7 @@ public class Conversation extends Observable{
 		//Qui o in un altro metodo da richiamare sempre qua, ci andrebbe il codice per mostrare la soluzione.
 	}
 	
-	public void next() {
-		if (!isLastQuestion(ans)) 
-			nextQuestion(qst, ans.getCode()); //In caso non lo fosse, aggiorno la domanda
-		else
-			setFoundASolution(true);
-	}
+
 	
 	public void callFeedback(boolean sat, String sugg, String mail) {
 		String prod_id = qst.getProduct();

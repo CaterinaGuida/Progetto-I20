@@ -29,7 +29,9 @@ public class SolverServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if (req.getPathInfo().equals("/prevqst")) {
-			
+			sf.sendSignal(SolverSignals.PREVQ);
+			String rend= Rythm.render("question.rtm",sf.retreiveQuestionText(),sf.retreiveQuestionOptions());
+			resp.getWriter().write(rend);
 		}
 		else if (req.getPathInfo().equals("/saveqst")) {
 			saveResp(req);

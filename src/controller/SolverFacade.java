@@ -17,7 +17,9 @@ public class SolverFacade{
 	
 	public void sendSignal(SolverSignals si) {
 		if(si.equals(SolverSignals.NEXTQ))
-			conv.next();
+			conv.nextQuestion();
+		else if (si.equals(SolverSignals.PREVQ))
+			conv.prevQuestion();
 	}
 	
 	public String retreiveQuestionText() {
