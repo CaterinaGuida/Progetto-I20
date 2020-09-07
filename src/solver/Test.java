@@ -23,8 +23,11 @@ public class Test {
 		
 		conv.beginConversation();*/
 		
+		SessionManager sm= new SessionManager();
+		
 		try {
-			new ApplicationServer(8080,new SolverServlet(new SessionManager())).start();
+			ApplicationServer app= new ApplicationServer(8080, new SolverServlet(sm));
+			app.start();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

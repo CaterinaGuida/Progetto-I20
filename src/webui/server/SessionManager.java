@@ -2,10 +2,14 @@ package webui.server;
 
 import java.util.HashMap;
 
-import org.solver.application.SolverApplication;
+import javax.websocket.SessionException;
+
+import org.solver.application.SolverFactory;
 
 import controller.SolverFacade;
 import solver.Conversation;
+import webui.server.exceptions.ConflictingSessionException;
+import webui.server.exceptions.SessionExpiredException;
 
 public class SessionManager {
 	private HashMap<String, SolverFacade> sessions;
@@ -18,11 +22,28 @@ public class SessionManager {
 		return "SID" + String.valueOf(number);
 	}
 	
-	public String genNewSession() {
+	public String genNewSession() throws ConflictingSessionException {
 		String sid = genSessionId();
 		
-		sessions.put(sid, SolverApplication.getIstance().requestNewSolver());
+		if(sessions.containsKey(sid)) {
+			throw new ConflictingSessionException(sid);
+		}
+		
+		sessions.put(sid, SolverFactory.getIstance().requestNewSolver(sid));
 		return sid;
+	}
+	
+	public void destroySession(String sid) {
+		sessions.remove(sid);
+	}
+	
+	public boolean checkExpired(String sid) throws SessionExpiredException {
+		for(String s: sessions.keySet()) {
+			if(s.equals(sid)) {
+				return true;
+			}
+		}
+		throw new SessionExpiredException();
 	}
 	
 	public SolverFacade getSessionFromId(String sid) {

@@ -19,6 +19,7 @@ public class CookieParser {
 	public static Cookie genCookie(String value, String id) {
 		return new Cookie(id, value);
 	}
+	
 }
 
 

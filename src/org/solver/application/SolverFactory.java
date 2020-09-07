@@ -1,23 +1,25 @@
 package org.solver.application;
 
+import java.util.HashMap;
+
 import controller.SolverFacade;
 import solver.Conversation;
 
 /// solver Application gestisce le istanze del solver è un singleton
 
-public class SolverApplication {
-	private static SolverApplication istance = null;
+public class SolverFactory {
+	private static SolverFactory istance = null;
 	
-	private SolverApplication() {}
+	private SolverFactory() {}
 	
-	public static SolverApplication getIstance() {
+	public static SolverFactory getIstance() {
 		if(istance == null) {
-			istance = new SolverApplication();
+			istance = new SolverFactory();
 		}
 		return istance;
 	}
 	
-	public SolverFacade requestNewSolver() {		
+	public SolverFacade requestNewSolver(String name) {		
 		return new SolverFacade(new Conversation());
 	}
 	
