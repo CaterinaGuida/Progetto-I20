@@ -23,7 +23,6 @@ public class Conversation extends Observable{
 		this.currentCode = "0";
 		this.foundASolution = false;
 		this.solution = null;
-		//currentCode += applianceSelector();
 		this.applianceTable = new QuestionTable();
 		this.qst = applianceTable.questionTable.get(currentCode);
 	} 
@@ -144,15 +143,6 @@ public class Conversation extends Observable{
 		return qst.getText();
 	}
 	
-	
-	/*Metodo privato da richiamare nel costruttore per far selezionare all'utente l'elettrodomestico.
-	 *Restituisce una stringa che rappresenta il codice del prodotto. Questa quindi andr� a sovrascrivere il currentCode, che all'inizio della conversazione
-	 *� impostato a 0, codice della prima domanda in assoluto.
-	 *F per frigo, L per lavatrice...*/
-	private String applianceSelector() {
-		//Per il momento � vuoto perch� ci occupiamo solo del frigo.		
-		return "F"; //Hard-code del valore F(rigo).
-	}
 	
 	//Metodo per mostrare le opzioni della domanda in questione
 	private void displayOptions(Question qst) {
