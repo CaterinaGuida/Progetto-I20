@@ -28,6 +28,7 @@ button {
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
+  width: 300px;
 }
 
 button:hover {
@@ -58,6 +59,7 @@ select {
   transition-duration: 0.4s;
   cursor: pointer;
   color: black;
+  width: 500px;
 }
 
 input {
@@ -71,6 +73,7 @@ input {
   transition-duration: 0.4s;
   cursor: pointer;
   color: black;
+  width: 300px;
 }
 
 h2 {color: #4CAF50}
@@ -97,6 +100,24 @@ a {color: #4CAF50; text-decoration: none}
 
 a:hover {text-decoration: underline;}
 
+.superdiv {
+  position: relative;
+}
+.content_div {
+  position: absolute;
+  left: 30%;
+}
+
+form {
+     display: inline;
+}
+
+.bottom_header {
+     position: relative;
+     bottom: 0;
+     right:0;
+}
+
 input[type=checkbox]
 {
   /* Double-sized Checkboxes */
@@ -106,8 +127,4 @@ input[type=checkbox]
   -o-transform: scale(2); /* Opera */
   transform: scale(2);
   padding: 10px;
-}
-
-form {
-    display: inline;
 }
