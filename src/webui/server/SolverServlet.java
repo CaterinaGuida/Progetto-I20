@@ -1,17 +1,15 @@
 package webui.server;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.rythmengine.Rythm;
 
-import controller.SolverFacade;
+import solver.SolverFacade;
 import webui.server.exceptions.ConflictingSessionException;
 import webui.server.exceptions.SessionExpiredException;
 

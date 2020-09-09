@@ -4,10 +4,9 @@ import java.util.HashMap;
 
 import javax.websocket.SessionException;
 
-import org.solver.application.SolverFactory;
-
-import controller.SolverFacade;
 import solver.Conversation;
+import solver.SolverFacade;
+import solver.factory.SolverFactory;
 import webui.server.exceptions.ConflictingSessionException;
 import webui.server.exceptions.SessionExpiredException;
 

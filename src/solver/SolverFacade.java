@@ -1,9 +1,8 @@
-package controller;
+package solver;
 
 import java.util.ArrayList;
 
-import controller.util.ConversationUtil;
-import solver.Conversation;
+import solver.utils.ConversationUtil;
 
 
 

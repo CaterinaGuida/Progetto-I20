@@ -1,9 +1,6 @@
 package solver;
 
 
-import controller.GuiController;
-import controller.SolverFacade;
-import gui.CliUI;
 import webui.server.ApplicationServer;
 import webui.server.SessionManager;
 import webui.server.SolverServlet;

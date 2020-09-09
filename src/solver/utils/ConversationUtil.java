@@ -1,4 +1,4 @@
-package controller.util;
+package solver.utils;
 
 import java.util.ArrayList;
 

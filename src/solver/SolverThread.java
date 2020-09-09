@@ -1,7 +1,5 @@
 package solver;
 
-import controller.util.SolverFacade;
-
 public class SolverThread extends Thread{
 	private Conversation conv;
 	private String thrName;
