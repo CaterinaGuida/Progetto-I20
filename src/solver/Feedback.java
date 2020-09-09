@@ -8,6 +8,8 @@ public class Feedback {
 	private String mail;
 	private String product_id;
 	
+	//crea un oggetto feedback che prende le informazioni (fornite dall'interfacci) e le manda direttamente
+	//al database attraverso l'oggetto feedbackDAO
 	Feedback(boolean sat, String sugg, String mail, String product_id) {
 		this.satisfied=sat;
 		this.suggestion=sugg;
