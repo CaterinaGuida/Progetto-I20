@@ -1,0 +1,32 @@
+@args() {
+	String qText,
+	List<String> options
+}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
+  <body>
+	<div class="superdiv">
+		<h1>Problem Solver</h1>
+	<div class="content_div">
+    <form method="get" action="/saveqst">
+      <h2>@(qText)</h2>
+      <select name="answ">
+      @for (String it: options) {
+		<option value="@(it)">@(it)</option>
+	  }
+      </select><br>
+      <button type="submit">Next Question</button>
+
+    </form>
+    <form action="/prevqst">
+      <button type="submit">Previous Question</button>
+      </form>
+	 <br><br><br>
+  	   <p> Non sei soddisfatto? <a href="/feedback">lascia un feedback</a></p>
+	 </div>
+	 </div>
+
+
+  </body>
+</html>

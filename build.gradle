@@ -9,7 +9,6 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
-    id 'application'
 }
 
 repositories {
@@ -23,13 +22,15 @@ dependencies {
     api 'org.apache.commons:commons-math3:3.6.1'
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    implementation 'com.google.guava:guava:28.0-jre'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+    
+    //Progetto-I20-dependencies
+    
     implementation 'org.eclipse.jetty:jetty-server:9.4.28.v20200408'
     implementation 'org.eclipse.jetty:jetty-servlet:9.4.28.v20200408'
     implementation 'org.rythmengine:rythm-engine:1.3.0'
     implementation "mysql:mysql-connector-java:8.0.19"
-
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
 }
-
-mainClassName = 'solver.solver.Test'

@@ -1,0 +1,24 @@
+@args() {
+	String sText;
+}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
+  <body>
+  <div class="superdiv">
+	  <h1>Problem Solver</h1>
+  <div class="content_div">
+    <h2> Ah ho capito!</h2>
+    <h3> @(sText)</h3>
+    <br>
+    <form action="/suppress">
+    	<button type="submit">Finish</button>
+    </form>
+    <br><br><br>
+	 <p> Non sei soddisfatto? <a href="/feedback">lascia un feedback</a></p>
+
+    </div>
+    </div>
+
+  </body>
+</html>
