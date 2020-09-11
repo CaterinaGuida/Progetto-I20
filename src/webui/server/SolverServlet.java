@@ -67,17 +67,22 @@ public class SolverServlet extends HttpServlet {
 		}else if(req.getPathInfo().equals("/suppress")) {
 			sm.destroySession(CookieParser.getValueFrom(req.getCookies(), ID));
 			resp.getWriter().write("Goodbye");
+			resp.sendRedirect("/");
 		}else if(req.getPathInfo().equals("/feedback")) {
 			resp.getWriter().write(Rythm.render("feedback.rtm",null));
 		
 		}else {
+			String sid=null;
 			try {
-				resp.addCookie(CookieParser.genCookie(sm.genNewSession(), ID));
+				sid = sm.genNewSession();
+				resp.addCookie(CookieParser.genCookie(sid, ID));
 			} catch (ConflictingSessionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			resp.sendRedirect("/nextqst");
+			SolverFacade sf=sm.getSessionFromId(sid);
+			String rend= Rythm.render("welcome.rtm",sf.retreiveQuestionText(),sf.retreiveQuestionOptions());
+			resp.getWriter().write(rend);
 		}
 		
 	
@@ -90,7 +95,7 @@ public class SolverServlet extends HttpServlet {
 			boolean sati = Boolean.parseBoolean(req.getParameter("satisf"));
 			SolverFacade sf=getSolver(req);
 			sf.sendSolverFeedback(req.getParameter("feedMail"), req.getParameter("feedText"), sati);
-			resp.sendRedirect("/");
+			resp.sendRedirect("/suppress");
 	}
 	}
 }
