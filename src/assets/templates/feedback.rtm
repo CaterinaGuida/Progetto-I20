@@ -2,28 +2,31 @@
 <html>
 <link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
   <body>
-       <div class="superdiv">
- 		<h1>Problem Solver</h1>
- 	<div class="content_div">
+       <div class="container">
+	<div class="topbanner">
+		<span><h1>Problem Solver</h1></span>
+		</div>
+	<div class="content_div"></h2>
   <h2>Enter your feedback</h2>
     <form action="/genfeedback" method="post">
-  		<h3>Are you </h3>
-  		<select name="satisf">
+  		<span class="sameline"><h3>Are you </h3>
+  		<select name="satisf" class="select-answer">
   			<option value="false">Unsatisfied</option>
   			<option value="true">Satisfied</option>
-  		</select>
-  		</input>
+  		</select></span>
 
-    	<br><h3>Mail: </h3>
-    	<input name="feedMail"></input>
-    	<br><p>
-    	<textarea name="feedText" rows="4" cols="50">insert yout text here</textarea>
+    	<span class="sameline"><br><h3>Mail: </h3>
+    	<input name="feedMail" class="text-camp"/></span>
     	<br>
-    	<button type="submit">Send Feedback</button>
-</div>
-</div>
+    	<span class="sameline"><h3>Feedback: </h3>
+    	<textarea name="feedText" rows="4" cols="50" class="text-camp">insert yout feedback here</textarea></span>
+    	<br>
+    	<button type="submit" class="form-button">Send Feedback</button>
+
 
     </form>
+    </div>
+	</div>
 
   </body>
 </html>

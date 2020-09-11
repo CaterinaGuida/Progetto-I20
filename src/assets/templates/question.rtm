@@ -6,24 +6,28 @@
 <html>
 <link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
   <body>
-	<div class="superdiv">
-		<h1>Problem Solver</h1>
+  <div class="container">
+	<div class="topbanner">
+		<span><h1>Problem Solver</h1></span>
+		</div>
 	<div class="content_div">
+		<h2>@(qText)</h2><br><br>
     <form method="get" action="/saveqst">
-      <h2>@(qText)</h2>
-      <select name="answ">
+      <select name="answ" class="select-answer">
       @for (String it: options) {
 		<option value="@(it)">@(it)</option>
 	  }
       </select><br>
-      <button type="submit">Next Question</button>
-
+      <div>
+      <a href="/prevqst" class="form-button">Previous Question</a>
+      <input type="submit" class="form-button" value="Next Question"/>
+		</div>
     </form>
-    <form action="/prevqst">
-      <button type="submit">Previous Question</button>
-      </form>
-	 <br><br><br>
-  	   <p> Non sei soddisfatto? <a href="/feedback">lascia un feedback</a></p>
+	 
+  	   
+	 <div class="footer">
+	 	<p> Non sei soddisfatto? <a href="/feedback">lascia un feedback </a></p>
+	 </div>
 	 </div>
 	 </div>
 
