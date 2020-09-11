@@ -22,7 +22,7 @@ public class WebApplication {	//Singleton consente di attivare solo una istanza 
 	
 	private void serverStart() {
 		try {
-			ApplicationServer app= new ApplicationServer(8080, new SolverServlet(new SessionManager()));
+			ApplicationServer app = new ApplicationServer(8080, new SolverServlet(new SessionManager()));
 			app.start();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
