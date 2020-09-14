@@ -40,6 +40,12 @@ public class SolverFacade{
 		return conv.getSolution();
 	}
 	
+	public boolean isTheFirstQuestion() {
+		if(conv.getCurrentCode().equals(conv.QUESTION_ZERO))
+			return true;
+		return false;
+	}
+	
 	public void sendSolverFeedback(String contact, String feedText, boolean sati) {
 		conv.callFeedback(sati, feedText, contact);
 	}
