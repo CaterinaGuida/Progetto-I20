@@ -6,7 +6,8 @@ import javax.swing.JFrame;
 public class Frame extends JFrame {
 	MainPanel panel;
 	public Frame() {
-		setTitle("gestione DataBase");
+
+		setTitle("Gestione Database");
 		setSize(900,500);
 		panel=new MainPanel();
 		getContentPane().add(panel);
