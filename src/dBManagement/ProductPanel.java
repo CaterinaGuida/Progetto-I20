@@ -21,7 +21,7 @@ public class ProductPanel extends JPanel {
 		setLayout(new GridLayout(3,1));
 		product=new JTextArea();
 		product.setForeground(Color.BLUE);
-		product.setText(new ProductDAO().getAllProduct());
+		product.setText("id \t nome \n"+new ProductDAO().getAllProduct());
 		text=new JPanel();
 		text.setBackground(Color.WHITE);
 		button=new JPanel();

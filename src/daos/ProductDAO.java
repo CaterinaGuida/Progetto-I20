@@ -37,7 +37,7 @@ public class ProductDAO {
 			st1=conn.prepareStatement(query);
 			rs1=st1.executeQuery(query);
 			while(rs1.next())
-				result+= rs1.getString(1)+" "+rs1.getString(2)+"\n";
+				result+= rs1.getString(1)+" \t "+rs1.getString(2)+"\n";
 		}
 		catch (Exception e) {e.printStackTrace();
 		}
