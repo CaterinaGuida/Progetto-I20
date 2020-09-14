@@ -21,7 +21,7 @@ public class SolverServlet extends HttpServlet {
 		this.sm=sm;
 		
 	}
-	
+	// Metodi Di Utilità
 	private SolverFacade getSolver(HttpServletRequest req) {
 		String sid= CookieParser.getValueFrom(req.getCookies(), sm.getApplicationID());
 		try {
@@ -34,6 +34,52 @@ public class SolverServlet extends HttpServlet {
 		return null;
 	}
 	
+	private void createNewSession(HttpServletResponse resp) throws IOException {
+		String sid=null;
+		try {
+			sid = sm.genNewSession();
+			resp.addCookie(CookieParser.genCookie(sid, sm.getApplicationID()));
+		} catch (ConflictingSessionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//Metodi per Rendering e salvataggio
+	
+	private void renderQuestionPage(SolverFacade sf, HttpServletResponse resp) throws IOException {
+		String defaultPage = "question.rtm";
+		if(sf.isTheFirstQuestion()) {
+			defaultPage="fquestion.rtm";
+		}
+		String rend= Rythm.render(defaultPage,sf.retreiveQuestionText(),sf.retreiveQuestionOptions());
+		resp.getWriter().write(rend);
+	}
+	
+	private void saveQuestionMethodGet(SolverFacade sf, HttpServletRequest req) {
+		sf.sendAnswer(req.getParameter("answ"));
+		sf.goNext();
+	}
+	
+	private void renderSolutionPage(SolverFacade sf, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(Rythm.render("solution.rtm", sf.getSolution()));
+	}
+	
+	private void renderFeedbackPage(HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(Rythm.render("feedback.rtm",null));
+	}
+	
+	private void suppressSession(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		sm.destroySession(CookieParser.getValueFrom(req.getCookies(), sm.getApplicationID()));
+		resp.getWriter().write("Goodbye");
+		resp.sendRedirect("/");
+	}
+	
+	private void saveFeedbackMethodPost(SolverFacade sf, HttpServletRequest req) {
+		boolean sati = Boolean.parseBoolean(req.getParameter("satisf"));
+		sf.sendSolverFeedback(req.getParameter("feedMail"), req.getParameter("feedText"), sati);
+	}
+	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,48 +87,32 @@ public class SolverServlet extends HttpServlet {
 			
 			SolverFacade sf=getSolver(req);
 			sf.goPrevious();
-			System.out.println(sf.retreiveQuestionText());
-			String rend= Rythm.render("question.rtm",sf.retreiveQuestionText(),sf.retreiveQuestionOptions());
-			resp.getWriter().write(rend);
+			renderQuestionPage(sf, resp);
 		}
 		else if (req.getPathInfo().equals("/saveqst")) {
-			SolverFacade sf=getSolver(req);
-			System.out.println(req.getParameter("answ"));
-			sf.sendAnswer(req.getParameter("answ"));
-			sf.goNext();
+			saveQuestionMethodGet(getSolver(req), req);
 			resp.sendRedirect("/nextqst");
 		}
 		else if (req.getPathInfo().equals("/nextqst")) {
-			
 			SolverFacade sf=getSolver(req);
 			if(sf.isFoundASolution()) {
 				resp.sendRedirect("/solution");
+				
 			}else {
-				String rend= Rythm.render("question.rtm",sf.retreiveQuestionText(),sf.retreiveQuestionOptions());
-				resp.getWriter().write(rend);
+				renderQuestionPage(sf, resp);
 			}
 		}else if(req.getPathInfo().equals("/solution")) {
+			renderSolutionPage(getSolver(req), resp);
 			
-			resp.getWriter().write(Rythm.render("solution.rtm", getSolver(req).getSolution()));
 		}else if(req.getPathInfo().equals("/suppress")) {
-			sm.destroySession(CookieParser.getValueFrom(req.getCookies(), sm.getApplicationID()));
-			resp.getWriter().write("Goodbye");
-			resp.sendRedirect("/");
+			suppressSession(req, resp);
+			
 		}else if(req.getPathInfo().equals("/feedback")) {
-			resp.getWriter().write(Rythm.render("feedback.rtm",null));
+			renderFeedbackPage(resp);
 		
 		}else {
-			String sid=null;
-			try {
-				sid = sm.genNewSession();
-				resp.addCookie(CookieParser.genCookie(sid, sm.getApplicationID()));
-			} catch (ConflictingSessionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			SolverFacade sf=sm.getSessionFromId(sid);
-			String rend= Rythm.render("welcome.rtm",sf.retreiveQuestionText(),sf.retreiveQuestionOptions());
-			resp.getWriter().write(rend);
+			createNewSession(resp);
+			resp.sendRedirect("/nextqst");
 		}
 		
 	
@@ -92,9 +122,7 @@ public class SolverServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		if(req.getPathInfo().equals("/genfeedback")) {
-			boolean sati = Boolean.parseBoolean(req.getParameter("satisf"));
-			SolverFacade sf=getSolver(req);
-			sf.sendSolverFeedback(req.getParameter("feedMail"), req.getParameter("feedText"), sati);
+			saveFeedbackMethodPost(getSolver(req), req);
 			resp.sendRedirect("/suppress");
 	}
 	}

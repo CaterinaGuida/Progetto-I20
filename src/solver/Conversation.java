@@ -19,8 +19,10 @@ public class Conversation extends Observable{
 	private Question qst;
 	private Answer ans;
 	
+	public static final String QUESTION_ZERO = "0";
+	
 	public Conversation() {
-		this.currentCode = "0";
+		this.currentCode = QUESTION_ZERO;
 		this.foundASolution = false;
 		this.solution = null;
 		this.applianceTable = new QuestionTable();
