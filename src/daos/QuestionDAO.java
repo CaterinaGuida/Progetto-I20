@@ -3,6 +3,7 @@ package daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import solver.Answer;
@@ -77,4 +78,30 @@ public class QuestionDAO {
 		DBConnection.closeConnection(conn);
 		return questions;
 	}
+	public void addQuestion(String id,String question,String product) {
+		PreparedStatement st1=null;
+		String query="INSERT INTO `sql9359791`.`question` (`ID`, `text`, `id_product`) VALUES (?,?,?)";
+		try {
+			st1=conn.prepareStatement(query);
+			st1.setString(1,id);
+			st1.setString(2,question);
+			st1.setString(3,product);
+			st1.executeUpdate();
+			st1.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

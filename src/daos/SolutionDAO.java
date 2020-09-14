@@ -29,5 +29,22 @@ public class SolutionDAO {
 		DBConnection.closeConnection(conn);
 		return text;
 	}
+	public void addSolution(String id,String text,String product) {
+		PreparedStatement st1=null;                                                           
+		Connection conn=null;												 
+		try {													
+			conn=DBConnection.startConnection(conn);
+			String query="insert into solution (`ID`, `solution`, `id_product`)values (?,?,?)";
+			st1=conn.prepareStatement(query);
+			st1.setString(1, id);
+			st1.setString(2, text);
+			st1.setString(3, product);
+			st1.executeUpdate();
+			st1.close();
+		}
+		catch (Exception e) {e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);
+	}
 }
 
