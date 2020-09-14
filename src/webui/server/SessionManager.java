@@ -12,8 +12,10 @@ import webui.server.exceptions.SessionExpiredException;
 
 public class SessionManager {
 	private HashMap<String, SolverFacade> sessions;
-	public SessionManager() {
+	private String applicationID;
+	public SessionManager(String appId) {
 		sessions=new HashMap<String, SolverFacade>();
+		applicationID=appId;
 	}
 	
 	private String genSessionId() { //genera una stringa formata da sid e 10 cifre casuali
@@ -21,6 +23,12 @@ public class SessionManager {
 		return "SID" + String.valueOf(number);
 	}
 	
+	
+	
+	public String getApplicationID() {
+		return applicationID;
+	}
+
 	public String genNewSession() throws ConflictingSessionException {
 		String sid = genSessionId();
 		

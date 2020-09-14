@@ -15,15 +15,15 @@ import webui.server.exceptions.SessionExpiredException;
 
 public class SolverServlet extends HttpServlet {
 	private SessionManager sm;
-	private static final String ID="org.solver.webui.session.id";
 	
 	public SolverServlet(SessionManager sm) {
 		// TODO Auto-generated constructor stub
 		this.sm=sm;
+		
 	}
 	
 	private SolverFacade getSolver(HttpServletRequest req) {
-		String sid= CookieParser.getValueFrom(req.getCookies(), ID);
+		String sid= CookieParser.getValueFrom(req.getCookies(), sm.getApplicationID());
 		try {
 			if(sm.checkExpired(sid))
 				return sm.getSessionFromId(sid);
@@ -65,19 +65,24 @@ public class SolverServlet extends HttpServlet {
 			
 			resp.getWriter().write(Rythm.render("solution.rtm", getSolver(req).getSolution()));
 		}else if(req.getPathInfo().equals("/suppress")) {
-			sm.destroySession(CookieParser.getValueFrom(req.getCookies(), ID));
+			sm.destroySession(CookieParser.getValueFrom(req.getCookies(), sm.getApplicationID()));
 			resp.getWriter().write("Goodbye");
+			resp.sendRedirect("/");
 		}else if(req.getPathInfo().equals("/feedback")) {
 			resp.getWriter().write(Rythm.render("feedback.rtm",null));
 		
 		}else {
+			String sid=null;
 			try {
-				resp.addCookie(CookieParser.genCookie(sm.genNewSession(), ID));
+				sid = sm.genNewSession();
+				resp.addCookie(CookieParser.genCookie(sid, sm.getApplicationID()));
 			} catch (ConflictingSessionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			resp.sendRedirect("/nextqst");
+			SolverFacade sf=sm.getSessionFromId(sid);
+			String rend= Rythm.render("welcome.rtm",sf.retreiveQuestionText(),sf.retreiveQuestionOptions());
+			resp.getWriter().write(rend);
 		}
 		
 	
@@ -90,7 +95,7 @@ public class SolverServlet extends HttpServlet {
 			boolean sati = Boolean.parseBoolean(req.getParameter("satisf"));
 			SolverFacade sf=getSolver(req);
 			sf.sendSolverFeedback(req.getParameter("feedMail"), req.getParameter("feedText"), sati);
-			resp.sendRedirect("/");
+			resp.sendRedirect("/suppress");
 	}
 	}
 }
