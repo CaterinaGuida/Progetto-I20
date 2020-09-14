@@ -1,5 +1,6 @@
 @args() {
-	String sText;
+	String qText,
+	List<String> options
 }
 <!DOCTYPE html>
 <html>
@@ -13,19 +14,26 @@
 	<div class="topbanner">
 		<span><h1>Problem Solver</h1></span>
 		</div>
-  <div class="content_div">
-    <h2> Ah ho capito!</h2>
-    <h3> @(sText)</h3>
-    <br>
-    <form action="/suppress">
-    	<button type="submit" class="form-button">Finish</button>
+	<div class="content_div">
+		<h2>@(qText)</h2><br><br>
+    <form method="get" action="/saveqst">
+      <select name="answ" class="select-answer">
+      @for (String it: options) {
+		<option value="@(it)">@(it)</option>
+	  }
+      </select><br>
+      <div>
+      <input type="submit" class="form-button" value="Prossima Domanda"/>
+		</div>
     </form>
-    <br><br><br>
+	 
+  	   
 	 <div class="footer">
 	 	<p> Non sei soddisfatto? <a href="/feedback">lascia un feedback </a></p>
 	 </div>
-    </div>
-    </div>
+	 </div>
+	 </div>
+
 
   </body>
 </html>

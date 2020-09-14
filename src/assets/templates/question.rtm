@@ -4,7 +4,11 @@
 }
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
+<head>
+	<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
+	<link rel="icon" href="/assets/templates/favicon.png" type="image/png">
+	<title>Problem Solver</title>
+</head>
   <body>
   <div class="container">
 	<div class="topbanner">
@@ -19,8 +23,8 @@
 	  }
       </select><br>
       <div>
-      <a href="/prevqst" class="form-button">Previous Question</a>
-      <input type="submit" class="form-button" value="Next Question"/>
+      <a href="/prevqst" class="form-button">Domanda Precedente</a>
+      <input type="submit" class="form-button" value="Prossima Domanda"/>
 		</div>
     </form>
 	 

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
+<head>
+	<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
+	<link rel="icon" href="/assets/templates/favicon.png" type="image/png">
+	<title>Problem Solver</title>
+</head>
   <body>
        <div class="container">
 	<div class="topbanner">
@@ -9,19 +13,19 @@
 	<div class="content_div"></h2>
   <h2>Enter your feedback</h2>
     <form action="/genfeedback" method="post">
-  		<span class="sameline"><h3>Are you </h3>
+  		<span class="sameline"><h3>Come ti reputi? </h3>
   		<select name="satisf" class="select-answer">
-  			<option value="false">Unsatisfied</option>
-  			<option value="true">Satisfied</option>
+  			<option value="false">Insoddisfatto</option>
+  			<option value="true">Soddisfatto</option>
   		</select></span>
 
     	<span class="sameline"><br><h3>Mail: </h3>
     	<input name="feedMail" class="text-camp"/></span>
     	<br>
-    	<span class="sameline"><h3>Feedback: </h3>
-    	<textarea name="feedText" rows="4" cols="50" class="text-camp">insert yout feedback here</textarea></span>
+    	<span class="sameline"><h3>Descrizione del feedback: </h3>
+    	<textarea name="feedText" rows="4" cols="50" class="text-camp">inserisci qui la descrizione del tuo feedback</textarea></span>
     	<br>
-    	<button type="submit" class="form-button">Send Feedback</button>
+    	<button type="submit" class="form-button">Manda il Feedback</button>
 
 
     </form>
