@@ -7,7 +7,7 @@ public class Frame extends JFrame {
 	MainPanel panel;
 	public Frame() {
 		setTitle("gestione DataBase");
-		setSize(850,500);
+		setSize(900,500);
 		panel=new MainPanel();
 		getContentPane().add(panel);
 	}

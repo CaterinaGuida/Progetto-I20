@@ -10,14 +10,18 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import dBManagement.actionListener.AddProduct;
+import daos.ProductDAO;
 
 @SuppressWarnings("serial")
 public class ProductPanel extends JPanel {
-	JTextArea name,code;
+	JTextArea name,code,product;
 	JButton addP;
-	JPanel text,button;
+	JPanel text,button,products;
 	public ProductPanel() {
-		setLayout(new GridLayout(2,1));
+		setLayout(new GridLayout(3,1));
+		product=new JTextArea();
+		product.setForeground(Color.BLUE);
+		product.setText(new ProductDAO().getAllProduct());
 		text=new JPanel();
 		text.setBackground(Color.WHITE);
 		button=new JPanel();
@@ -35,11 +39,15 @@ public class ProductPanel extends JPanel {
 		addP=new JButton("Aggiungi prodotto");
 		addP.setBackground(Color.CYAN);
 		addP.addActionListener(new AddProduct(name,code));
+		products=new JPanel();
+		products.add(product);
+		products.setBackground(Color.WHITE);
 		text.add(name);
 		text.add(code);
 		add(text);
 		button.add(addP);
 		add(button);
+		add(products);
 		}
 
 }

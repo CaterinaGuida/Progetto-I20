@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import dBManagement.actionListener.AddProduct;
+import dBManagement.actionListener.AddSolution;
 
 @SuppressWarnings("serial")
 public class SolutionPanel extends JPanel {

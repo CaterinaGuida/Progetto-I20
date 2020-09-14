@@ -2,6 +2,10 @@ package daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.HashMap;
+
+import solver.Question;
 
 public class ProductDAO {
 	private Connection conn;
@@ -23,5 +27,20 @@ public class ProductDAO {
 		catch (Exception e) {e.printStackTrace();
 		}
 		DBConnection.closeConnection(conn);
+	}
+	public String getAllProduct() {
+		PreparedStatement st1;
+		ResultSet rs1;
+		String result="";
+		try {					
+			String query="SELECT * FROM product";
+			st1=conn.prepareStatement(query);
+			rs1=st1.executeQuery(query);
+			while(rs1.next())
+				result+= rs1.getString(1)+" "+rs1.getString(2)+"\n";
+		}
+		catch (Exception e) {e.printStackTrace();
+		}
+		return result;
 	}
 }
