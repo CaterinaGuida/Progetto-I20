@@ -44,6 +44,7 @@ public class SolutionDAO {
 		}
 		catch (Exception e) {e.printStackTrace();
 		}
+		DBConnection.closeConnection(conn);
 	}
 }
 

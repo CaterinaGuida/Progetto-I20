@@ -41,6 +41,7 @@ public class ProductDAO {
 		}
 		catch (Exception e) {e.printStackTrace();
 		}
+		DBConnection.closeConnection(conn);
 		return result;
 	}
 }

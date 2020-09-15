@@ -19,12 +19,14 @@ public class AddProduct implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		dbProduct=new ProductDAO();
 		if(name.getText().length()>1) {
 			dbProduct.addProduct(name.getText(), code.getText());
 			name.setText("");
 			code.setText("");
 			product.setText(dbProduct.getAllProduct());
 		}
+		
 	}
 
 }

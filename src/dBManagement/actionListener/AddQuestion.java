@@ -19,12 +19,12 @@ public class AddQuestion implements ActionListener {
 		this.id=id;
 		this.product=product;
 		this.textQ=textQ;
-		dbQuestion=new QuestionDAO();
-		dbAnswer=new AnswerDAO();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		dbQuestion=new QuestionDAO();
+		dbAnswer=new AnswerDAO();
 		dbQuestion.addQuestion(id.getText(), textQ.getText(), product.getText());
 		for(AnswerPanel a:answers) {
 			if(a.getText().length()>1)
@@ -36,7 +36,8 @@ public class AddQuestion implements ActionListener {
 		}
 		id.setText("");
 		product.setText("");
-		textQ.setText("");			
+		textQ.setText("");		
+		dbAnswer.closeConnection();
 	}
 
 }
