@@ -1,5 +1,6 @@
 package dBManagement;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
@@ -22,6 +23,7 @@ public class MainPanel extends JPanel {
 		attention=new AttentionPanel();
 		feedback=new FeedbackPanel();
 		pane=new JTabbedPane();
+		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
 		pane.addTab("ATTENZIONE!!", attention);
 		pane.setMnemonicAt(0, KeyEvent.VK_1);
@@ -34,7 +36,7 @@ public class MainPanel extends JPanel {
 		pane.addTab("feedback", feedback);
 		pane.setMnemonicAt(4, KeyEvent.VK_5);
 		pane.setBackground(Color.WHITE);
-		add(pane);
+		add(pane, BorderLayout.CENTER);
 	}
 
 }

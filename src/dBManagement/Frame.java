@@ -1,5 +1,6 @@
 package dBManagement;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -13,7 +14,8 @@ public class Frame extends JFrame {
 		setTitle("Gestione Database");
 		setSize(900,500);
 		panel=new MainPanel();
-		getContentPane().add(panel);
+		setLayout(new BorderLayout());
+		getContentPane().add(panel,BorderLayout.CENTER);
 		set();
 	}
 	private void set() {

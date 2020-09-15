@@ -23,23 +23,31 @@ public class FeedbackDAO {
 		}
 		DBConnection.closeConnection(conn);
 	}
-	public static String getAllFeedback() {
+	public static Object[][] getAllFeedback() {
 		PreparedStatement st1;
 		Connection conn=null;												 
 
 		ResultSet rs1;
-		String result="";
+		Object result[][]=null;
 		try {				
 			conn=DBConnection.startConnection(conn);
 			String query="SELECT * FROM feedback";
 			st1=conn.prepareStatement(query);
 			rs1=st1.executeQuery(query);
-			while(rs1.next()) {
-				result+= rs1.getString(1)+"\t"+rs1.getString(2)+"\t"+rs1.getString(3)+"\t";
+			int rowCount = 0;
+		    while (rs1.next()) {
+		    	rowCount++;
+		    }
+		    rs1.first();
+		    result = new Object[rowCount][4];
+			for(int j=0; rs1.next(); j++) {
+				result[j][0]= rs1.getString(1);
+				result[j][1]= rs1.getString(2);
+				result[j][2]= rs1.getString(3);
 				if(rs1.getString(4).equals("true"))
-					result+="soddisfatto \n";
+					result[j][3]= "Soddisfatto";
 				else
-					result+="insoddisfatto \n";
+					result[j][3]= "Insoddisfatto";
 			}
 		}
 		catch (Exception e) {e.printStackTrace();
