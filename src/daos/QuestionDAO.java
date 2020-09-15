@@ -92,7 +92,6 @@ public class QuestionDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DBConnection.closeConnection(conn);
 	}
 	
 	

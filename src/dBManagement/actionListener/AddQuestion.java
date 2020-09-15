@@ -30,6 +30,13 @@ public class AddQuestion implements ActionListener {
 			if(a.getText().length()>1)
 			dbAnswer.addAnswer(a.getText(), id.getText(), a.getNumber());
 		}
+		for(AnswerPanel a: answers) {
+			a.setText();
+			a.setNumber();
+		}
+		id.setText("");
+		product.setText("");
+		textQ.setText("");			
 	}
 
 }

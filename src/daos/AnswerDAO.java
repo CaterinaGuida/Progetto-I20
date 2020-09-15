@@ -24,6 +24,8 @@ public class AnswerDAO {
 		}
 		catch (Exception e) {e.printStackTrace();
 		}
+	}
+	public void closeConnection() {
 		DBConnection.closeConnection(conn);
 	}
 }
