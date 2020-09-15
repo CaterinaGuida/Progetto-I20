@@ -38,7 +38,7 @@ public class ProductPanel extends JPanel {
 		code.setBorder(n);
 		addP=new JButton("Aggiungi prodotto");
 		addP.setBackground(Color.CYAN);
-		addP.addActionListener(new AddProduct(name,code));
+		addP.addActionListener(new AddProduct(name,code,product));
 		products=new JPanel();
 		products.add(product);
 		products.setBackground(Color.WHITE);

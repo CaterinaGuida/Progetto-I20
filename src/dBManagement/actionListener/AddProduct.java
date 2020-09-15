@@ -8,20 +8,22 @@ import javax.swing.JTextArea;
 import daos.ProductDAO;
 
 public class AddProduct implements ActionListener {
-	JTextArea name,code;
+	JTextArea name,code,product;
 	ProductDAO dbProduct;
-	public AddProduct(JTextArea name,JTextArea code) {
+	public AddProduct(JTextArea name,JTextArea code, JTextArea product) {
 		this.code=code;
 		this.name=name;
+		this.product=product;
 		dbProduct=new ProductDAO();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(name.getText().length()>1 && code.getText().length()>1) {
+		if(name.getText().length()>1) {
 			dbProduct.addProduct(name.getText(), code.getText());
 			name.setText("");
 			code.setText("");
+			product.setText(dbProduct.getAllProduct());
 		}
 	}
 
