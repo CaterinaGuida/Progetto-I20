@@ -4,6 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="/assets/templates/style.css">
 	<link rel="icon" href="/assets/templates/favicon.png" type="image/png">
 	<title>Problem Solver</title>
+	<script type="text/javascript" src="/assets/templates/mailval.js"></script>
 </head>
   <body>
        <div class="container">
@@ -20,7 +21,7 @@
   		</select></span>
 
     	<span class="sameline"><br><h3>Mail: </h3>
-    	<input name="feedMail" class="text-camp"/></span>
+    	<input oninput="javascript:validateEmail(this)" id="mailCamp" name="feedMail" class="text-camp"/></span>
     	<br>
     	<span class="sameline"><h3>Descrizione del feedback: </h3>
     	<textarea name="feedText" rows="4" cols="50" class="text-camp">inserisci qui la descrizione del tuo feedback</textarea></span>
